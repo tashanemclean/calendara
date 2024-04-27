@@ -6,7 +6,6 @@ import { Calendar } from '../../components/Calendar';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import { colors } from '../../constants/colors';
-import { Calendar2 } from '../../components/Calendar/Calendar2';
 
 export const Demo = () => {
   const [showDefaultStyles, setShowDefaultStyles] = useState(true);
@@ -68,17 +67,7 @@ export const Demo = () => {
           panelHeight="100%"
           panelWidth="75%"
         >
-          {/* <Calendar
-            onMonthChange={(x) => console.log(x)}
-            style={showDefaultStyles ? {} : { backgroundColor: '#222222', borderRadius: 10 }}
-            renderDay={renderDay}
-            titleTextStyle={showDefaultStyles ? {} : { color: 'white' }}
-            dayNameTextStyle={showDefaultStyles ? {} : { color: colors.lightGray }}
-            dayTextStyle={showDefaultStyles ? {} : { fontFamily: 'serif', color: 'white', borderRadius: '25%' }}
-            activeDayStyle={showDefaultStyles ? {} : { borderRadius: '10%', backgroundColor: '#314056' }}
-            inactiveDayStyle={showDefaultStyles ? {} : { borderRadius: '10%', backgroundColor: '#333333' }}
-          /> */}
-          <Calendar2 />
+          <Calendar />
         </Panel>
       </Section>
     </Container>
