@@ -1,0 +1,7 @@
+.github
+assets
+node_modules
+*.md
+build
+dist
+.env
