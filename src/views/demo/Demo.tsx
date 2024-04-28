@@ -6,53 +6,9 @@ import { Calendar } from '../../components/Calendar';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import { colors } from '../../constants/colors';
+import { ActivitiesCheckbox } from '../../components/Activities';
 
 export const Demo = () => {
-  const [showDefaultStyles, setShowDefaultStyles] = useState(true);
-  const [showSampleEvents, setShowSampleEvents] = useState(false);
-
-  const handleShowDefaultStyleChange = (e) => {
-    setShowDefaultStyles(e.target.checked);
-  };
-
-  const handleShowSampleEventsChange = (e) => {
-    setShowSampleEvents(e.target.checked);
-  };
-
-  const renderDay = (day: string) => {
-    const isSmallCalendar = false;
-    if (!isSmallCalendar) {
-      const date = dayjs(day);
-      const diff = date.diff(dayjs().startOf('day'));
-      if (diff === -259200000 || diff === 259200000) {
-        return (
-          <div
-            style={{
-              boxSizing: 'border-box',
-              height: '100%',
-              width: '100%',
-              backgroundImage: 'url(https://farm2.staticflickr.com/1203/1475793643_d911a66735_m.jpg)',
-              backgroundSize: 'cover',
-              borderRadius: showDefaultStyles ? 0 : '10%',
-            }}
-          />
-        );
-      }
-    }
-    return (
-      <div
-        style={{
-          boxSizing: 'border-box',
-          height: '100%',
-          width: '100%',
-          backgroundImage: 'url(https://farm2.staticflickr.com/1203/1475793643_d911a66735_m.jpg)',
-          backgroundSize: 'cover',
-          borderRadius: showDefaultStyles ? 0 : '10%',
-        }}
-      />
-    );
-  };
-
   return (
     <Container>
       <Header title="Calendara" />
@@ -61,7 +17,7 @@ export const Demo = () => {
           panelHeight="100%"
           panelWidth="25%"
         >
-          <>Interaction panel</>
+          <ActivitiesCheckbox />
         </Panel>
         <Panel
           panelHeight="100%"

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '../Buttons/Button';
+import { Button } from '../Buttons';
 import { EmailField } from '../Forms/EmailField';
 import FormManager from '../Forms/FormManager';
 import { PasswordField } from '../Forms/PasswordField';

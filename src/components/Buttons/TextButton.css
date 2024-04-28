@@ -1,0 +1,49 @@
+.text-btn {
+  background: inherit;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  height: 32px;
+  padding: 4px 15px;
+  border-radius: 6px;
+  color: #ffffff;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 8px;
+
+  @media screen and (max-width: 1280px) {
+    margin-bottom: unset;
+  }
+}
+
+.text-btn:focus {
+  outline: none;
+}
+
+.btn-icon {
+  fill: #ffffff;
+}
+
+.text-btn .btn-icon:first-of-type {
+  margin-right: 4px;
+}
+
+.text-btn .btn-icon:last-of-type {
+  margin-left: 4px;
+}
+
+.text-btn:hover {
+  background-color: rgba(0, 0, 0, 0.16);
+}
+
+.activities-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}

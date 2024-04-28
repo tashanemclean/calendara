@@ -1,6 +1,8 @@
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import './components/Ripple/Ripple.css';
 import './components/TextInput/TextInput.css';
+import './components/Buttons/TextButton.css';
 
 import Div100vh from 'react-div-100vh';
 import { ToastContainer } from 'react-toastify';

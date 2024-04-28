@@ -15,6 +15,7 @@ export const TextMD = {
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
+    color: #000000;
   `,
   Regular: styled.div`
     font-family: 'Montserrat', sans-serif;
