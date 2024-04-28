@@ -3,10 +3,9 @@ import { screen } from '../../constants/screen';
 import { Header } from '../../components/Header';
 import { Panel } from '../../components/Panel';
 import { Calendar } from '../../components/Calendar';
-import { useState } from 'react';
-import dayjs from 'dayjs';
-import { colors } from '../../constants/colors';
+
 import { ActivitiesCheckbox } from '../../components/Activities';
+import { EditOptions } from '../../components/EditOptions';
 
 export const Demo = () => {
   return (
@@ -17,7 +16,9 @@ export const Demo = () => {
           panelHeight="100%"
           panelWidth="25%"
         >
-          <ActivitiesCheckbox />
+          <EditOptions>
+            <ActivitiesCheckbox />
+          </EditOptions>
         </Panel>
         <Panel
           panelHeight="100%"

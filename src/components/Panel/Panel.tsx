@@ -6,7 +6,7 @@ import { ReactNode } from 'react';
 interface PanelProps {
   panelHeight?: string;
   panelWidth?: string;
-  children: ReactNode;
+  children: ReactNode | ReactNode[];
 }
 
 export const Panel = ({ children, panelHeight, panelWidth }: Readonly<PanelProps>) => {

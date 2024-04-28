@@ -1,10 +1,14 @@
+import { AuthProvider } from '../../contexts/authContext';
+import { UserInterfaceProvider } from '../../contexts/userInterfaceContext';
 import { Demo } from './Demo';
 
 const Index = () => {
   return (
-    <>
-      <Demo />
-    </>
+    <AuthProvider>
+      <UserInterfaceProvider>
+        <Demo />
+      </UserInterfaceProvider>
+    </AuthProvider>
   );
 };
 
