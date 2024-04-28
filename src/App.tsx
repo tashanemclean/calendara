@@ -5,8 +5,9 @@ import './components/TextInput/TextInput.css';
 import './components/Buttons/TextButton.css';
 
 import Div100vh from 'react-div-100vh';
-import { ToastContainer } from 'react-toastify';
 import { Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
 import { AuthProvider } from './contexts/authContext';
 import { UserInterfaceProvider } from './contexts/userInterfaceContext';
 

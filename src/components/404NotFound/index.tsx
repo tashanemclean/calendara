@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { screen } from '../../constants/screen';
 import RouteConstants from '../../routing/RouteConstants';
 import { Button } from '../Buttons/Button';
-import { screen } from '../../constants/screen';
 
 const NotFound = () => {
   const navigate = useNavigate();

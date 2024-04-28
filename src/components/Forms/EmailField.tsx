@@ -3,9 +3,8 @@ import { Controller } from 'react-hook-form';
 import styled from 'styled-components';
 
 import { TextMD } from '../../typography';
-
-import { TextInput } from '../TextInput/TextInput';
 import { ErrorMessageContainer } from '../../utils/common/style';
+import { TextInput } from '../TextInput/TextInput';
 
 interface EmailFieldProps {
   control: Control<FieldValues, unknown>;

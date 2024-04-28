@@ -1,5 +1,4 @@
-import { CSSProperties, ReactNode } from 'react';
-import { Ripple } from '../Ripple';
+import { ReactNode } from 'react';
 
 interface Props {
   className?: string;

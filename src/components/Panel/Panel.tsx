@@ -1,6 +1,7 @@
-import styled from 'styled-components';
-import { screen } from '../../constants/screen';
 import { ReactNode } from 'react';
+import styled from 'styled-components';
+
+import { screen } from '../../constants/screen';
 
 interface PanelProps {
   panelHeight?: string;

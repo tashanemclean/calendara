@@ -9,7 +9,7 @@ const useAppConfig = () => {
       apiUrl: apiUrl,
       isProduction: env ? env === 'Production' : true,
     }),
-    [env],
+    [],
   );
 
   return {

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-import { NextArrowIcon, PrevArrowIcon } from '../Icons';
 import { Dropzone } from '../Dropzone';
+import { NextArrowIcon, PrevArrowIcon } from '../Icons';
 import useCalendar from './useCalendar';
 
 export const Calendar = () => {
@@ -61,7 +61,7 @@ export const Calendar = () => {
         days.push(
           <Dropzone
             className={`col cell ${isCurrentDay ? 'selected' : isCurrentMonth ? '' : 'disabled'}`}
-            key={`${idx}-${i++}`}
+            key={`${i++ + idx}`}
           >
             <span className="number">{day}</span>
             <span className="bg">{day}</span>
@@ -71,7 +71,7 @@ export const Calendar = () => {
       rows.push(
         <div
           className="row"
-          key={index}
+          key={`${i + index}`}
         >
           {days}
         </div>,

@@ -1,8 +1,9 @@
 import { useLocalStorage } from '@lilib/hooks';
 import { Navigate, Outlet } from 'react-router-dom';
-import RouteConstants from '../../routing/RouteConstants';
+
 import AppLayout from '../../App';
 import { AuthProvider } from '../../contexts/authContext';
+import RouteConstants from '../../routing/RouteConstants';
 
 export const AuthenticationLayout = () => {
   const [userClaims] = useLocalStorage('userClaims');

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useAuth } from '../../contexts/authContext';
 import { FieldValues } from 'react-hook-form';
+
+import { useAuth } from '../../contexts/authContext';
 
 const useLogin = () => {
   const {

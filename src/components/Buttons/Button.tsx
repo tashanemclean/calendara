@@ -2,11 +2,11 @@ import classnames from 'classnames';
 import { CSSProperties, forwardRef, MouseEventHandler, ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { ButtonStyle, buttonStyle } from './types';
+import { colors } from '../../constants/colors';
 import { TextMD } from '../../typography';
 // import { Spinner } from '../Spinner';
 import { Scale } from '../Transitions/Scale';
-import { colors } from '../../constants/colors';
+import { ButtonStyle, buttonStyle } from './types';
 
 interface Props {
   action?: 'loading';

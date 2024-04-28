@@ -1,11 +1,12 @@
 import { RouteObject } from 'react-router-dom';
-import { AuthenticationLayout, ProtectedRouteLayout } from '../components/Auth/ProtectedRoute';
-import RouteConstants from './RouteConstants';
-import { Login } from '../views/login';
+
 import { NotFound } from '../components/404NotFound';
-import HomeIndex from '../views/home';
+import { AuthenticationLayout, ProtectedRouteLayout } from '../components/Auth/ProtectedRoute';
 import DemoIndex from '../views/demo';
+import HomeIndex from '../views/home';
+import { Login } from '../views/login';
 import PdfIndex from '../views/pdf';
+import RouteConstants from './RouteConstants';
 
 export const routes: RouteObject[] = [
   {

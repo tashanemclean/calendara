@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { screen } from '../../constants/screen';
-import { Header } from '../../components/Header';
-import { Panel } from '../../components/Panel';
-import { Calendar } from '../../components/Calendar';
 
 import { ActivitiesCheckbox } from '../../components/Activities';
-import { EditOptions } from '../../components/EditOptions';
+import { Calendar } from '../../components/Calendar';
 import { Draggable } from '../../components/Draggable';
+import { EditOptions } from '../../components/EditOptions';
+import { Header } from '../../components/Header';
+import { Panel } from '../../components/Panel';
+import { screen } from '../../constants/screen';
 
 export const Demo = () => {
   return (
@@ -59,22 +59,5 @@ const Section = styled.div`
     width: 100vw;
     display: flex;
     flex-direction: column;
-  }
-`;
-
-const Title = styled.h1`
-  text-align: center;
-  margin-bottom: 40px;
-`;
-
-const InputsContainer = styled.div`
-  > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  > div > p {
-    margin-left: 10px;
   }
 `;

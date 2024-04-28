@@ -1,13 +1,14 @@
 import styled from 'styled-components';
+
+import { colors } from '../../constants/colors';
+import { screen } from '../../constants/screen';
+import { H2 } from '../../typography';
+import { ErrorMessageContainer } from '../../utils/common/style';
 import { Button } from '../Buttons';
 import { EmailField } from '../Forms/EmailField';
 import FormManager from '../Forms/FormManager';
 import { PasswordField } from '../Forms/PasswordField';
 import useLogin from './useLogin';
-import { colors } from '../../constants/colors';
-import { screen } from '../../constants/screen';
-import { H2 } from '../../typography';
-import { ErrorMessageContainer } from '../../utils/common/style';
 
 export const LoginForm = () => {
   const { actualError, loading, tooManyAttempts, handleLogin } = useLogin();
@@ -65,14 +66,6 @@ const Background = styled.div`
   padding: 0;
   width: 100vw;
   height: 100vh;
-`;
-
-const Divider = styled.div`
-  width: 57.6px;
-  border: solid 4px ${colors.Mustard[500]};
-  border-radius: 2px;
-  padding: 0;
-  margin: 0;
 `;
 
 const VStack = styled.div`

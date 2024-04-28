@@ -1,5 +1,6 @@
-import { ChangeEvent, forwardRef, InputHTMLAttributes, useState } from 'react';
+import { forwardRef, InputHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
+
 import { colors } from '../../constants/colors';
 import { TextMD, TextSM } from '../../typography';
 

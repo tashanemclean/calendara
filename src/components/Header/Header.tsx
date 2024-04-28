@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+
 import { colors } from '../../constants/colors';
 import { screen } from '../../constants/screen';
-import { sizes } from '../../constants/sizes';
 
 interface HeaderProps {
   title: string;

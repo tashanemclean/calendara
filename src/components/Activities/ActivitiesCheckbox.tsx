@@ -1,14 +1,12 @@
-import { ChangeEvent, useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { TextButton } from '../Buttons';
-// import { BasicDropdown } from '../Dropdown';
-
-import { SlideIn } from '../Transitions/SlideIn';
-import { Checkbox } from '../Checkbox';
-import { ExpandMoreIcon } from '../Icons';
-import { ClickOutside } from '../Dropdown';
 import { colors } from '../../constants/colors';
+import { TextButton } from '../Buttons';
+import { Checkbox } from '../Checkbox';
+import { ClickOutside } from '../Dropdown';
+import { ExpandMoreIcon } from '../Icons';
+import { SlideIn } from '../Transitions/SlideIn';
 
 interface RegionFilterProps {
   overrideColor?: string;
@@ -20,7 +18,6 @@ const items = ['Soccer', 'Basketball'];
 export const ActivitiesCheckbox = ({ overrideColor }: RegionFilterProps) => {
   const [open, setOpen] = useState(false);
   // const { buttonRef, dropdownRef, style, checkboxItemsVM, handleChange } = useCategories();
-  const [selectedActivity, setSelectedActivity] = useState(new Set());
   const dropdownRef = useRef(null);
   const style = {
     left: `8px`,
@@ -38,7 +35,7 @@ export const ActivitiesCheckbox = ({ overrideColor }: RegionFilterProps) => {
   const renderActivityCheckbox = () =>
     items.map((item, key) => (
       <Checkbox
-        key={key}
+        key={`${item + key}`}
         name={item}
         value={item}
         text={item}

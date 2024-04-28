@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useCallback, useContext, useMemo, useReducer } from 'react';
+
 import userInterfaceReducer, { initialState, UserInterfaceActionTypes, UserInterfaceState } from '../reducers/ui';
 
 interface UserInterfaceContextActions {
