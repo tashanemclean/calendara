@@ -1,24 +1,40 @@
-import { ReactNode, useState } from 'react';
-import { DropZone, Text, TextDropItem } from 'react-aria-components';
+import { ReactNode } from 'react';
+import { DropZone, Text } from 'react-aria-components';
+import styled from 'styled-components';
+import useDropzone from './useDropzone';
 
 export const Dropzone = ({ children, className }: { children: ReactNode; className?: string }) => {
-  let [dropped, setDropped] = useState<string | null>(null);
+  const { dropped, getDropOperation, onDrop, onRemove } = useDropzone();
+
+  const renderDropped = () => (
+    <DroppedItemContainer>
+      {dropped?.map((item, key) => (
+        <Text
+          slot={`${key}`}
+          key={`${key}-${item}`}
+        >
+          {item}
+          <span onClick={() => onRemove(item)}>X</span>
+        </Text>
+      ))}
+    </DroppedItemContainer>
+  );
+
   return (
     <>
       <DropZone
         className={className}
-        onDrop={async (e) => {
-          let items = await Promise.all(
-            e.items
-              .filter((item) => item.kind === 'text' && item.types.has('text/plain'))
-              .map((item: TextDropItem) => item.getText('text/plain')),
-          );
-          setDropped(items.join('\n'));
-        }}
+        getDropOperation={getDropOperation}
+        onDrop={onDrop}
       >
-        <Text slot="label">{dropped}</Text>
+        {renderDropped()}
         {children && children}
       </DropZone>
     </>
   );
 };
+
+const DroppedItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;

@@ -21,10 +21,12 @@ export const Demo = () => {
             <ActivitiesCheckbox />
           </EditOptions>
           <Draggable text="Drag me" />
+          <Draggable text="Drag me 2" />
         </Panel>
         <Panel
           panelHeight="100%"
           panelWidth="75%"
+          panelPadding="0px"
         >
           <Calendar />
         </Panel>

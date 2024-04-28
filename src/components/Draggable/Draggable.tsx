@@ -7,8 +7,7 @@ export const Draggable = ({ text }: { text: string }) => {
     getItems() {
       return [
         {
-          'text/plain': 'hello world',
-          'my-app-custom-type': JSON.stringify({ message: 'hello world' }),
+          'text/plain': text,
         },
       ];
     },

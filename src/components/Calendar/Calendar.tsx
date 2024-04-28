@@ -1,42 +1,11 @@
-import type { Dayjs } from 'dayjs';
-import { ReactNode, useEffect, useState } from 'react';
-import locale from 'dayjs/locale/en';
-import dayjs from 'dayjs';
-import weekdayPlugin from 'dayjs/plugin/weekday';
-import objectPlugin from 'dayjs/plugin/toObject';
-import isTodayPlugin from 'dayjs/plugin/isToday';
+import { ReactNode } from 'react';
 
 import { NextArrowIcon, PrevArrowIcon } from '../Icons';
 import { Dropzone } from '../Dropzone';
+import useCalendar from './useCalendar';
 
-dayjs.extend(weekdayPlugin);
-dayjs.extend(objectPlugin);
-dayjs.extend(isTodayPlugin);
-
-interface WeekDates {
-  dates: {
-    day: number;
-    month: number;
-    year: number;
-    isCurrentMonth: boolean;
-    isCurrentDay: boolean;
-  }[];
-}
 export const Calendar = () => {
-  const now = dayjs().locale({
-    ...locale,
-  });
-
-  const [currentMonth, setCurrentMonth] = useState(now);
-  const [arrayOfDays, setArrayOfDays] = useState<WeekDates[]>([]);
-
-  const nextMonth = () => {
-    setCurrentMonth(currentMonth.add(1, 'month'));
-  };
-
-  const prevMonth = () => {
-    setCurrentMonth(currentMonth.subtract(1, 'month'));
-  };
+  const { arrayOfDays, currentMonth, now, nextMonth, prevMonth } = useCalendar();
 
   const renderHeader = () => {
     const dateFormat = 'MMMM YYYY';
@@ -82,35 +51,6 @@ export const Calendar = () => {
     return <div className="days row">{days}</div>;
   };
 
-  const getAllDays = () => {
-    let currentDate = currentMonth.startOf('month').weekday(0);
-    const nextMonth = currentMonth.add(1, 'month').month();
-
-    let allDates: WeekDates[] = [];
-    let weekDates = [];
-
-    let weekCounter = 1;
-
-    while (currentDate.weekday(0).toObject().months !== nextMonth) {
-      const formatted = formateDateObject(currentDate);
-
-      weekDates.push(formatted);
-      if (weekCounter === 7) {
-        allDates.push({ dates: weekDates });
-        weekDates = [];
-        weekCounter = 0;
-      }
-
-      weekCounter++;
-      currentDate = currentDate.add(1, 'day');
-      setArrayOfDays(allDates);
-    }
-  };
-
-  useEffect(() => {
-    getAllDays();
-  }, [currentMonth]);
-
   const renderCells = () => {
     const rows: ReactNode[] = [];
     let days: ReactNode[] = [];
@@ -140,19 +80,6 @@ export const Calendar = () => {
     });
 
     return <div className="body">{rows}</div>;
-  };
-
-  const formateDateObject = (date: Dayjs) => {
-    const clone = { ...date.toObject() };
-    const formattedObject = {
-      day: clone.date,
-      month: clone.months,
-      year: clone.years,
-      isCurrentMonth: clone.months === currentMonth.month(),
-      isCurrentDay: date.isToday(),
-    };
-
-    return formattedObject;
   };
 
   return (
