@@ -8,11 +8,10 @@ const useDropzone = () => {
   const getDropOperation = (types: DragTypes) => (types.has('text/plain') ? 'copy' : 'cancel');
 
   const onDrop = async (e: DropEvent) => {
-    let items = await Promise.all(
-      e.items
-        .filter((item) => item.kind === 'text' && item.types.has('text/plain'))
-        .map((item: TextDropItem) => item.getText('text/plain')),
-    );
+    // ensure that we selected the correct elements
+    let filtered = e.items.filter((item) => item.kind === 'text' && item.types.has('text/plain'));
+    const items = await Promise.all((filtered as TextDropItem[]).map((items) => items.getText('text/plain')));
+    // ensure we include the previous elements with the new item(s) selected
     const list = [...dropped, ...items];
     setDropped(list);
   };
