@@ -7,6 +7,7 @@ import objectPlugin from 'dayjs/plugin/toObject';
 import isTodayPlugin from 'dayjs/plugin/isToday';
 
 import { NextArrowIcon, PrevArrowIcon } from '../Icons';
+import { Dropzone } from '../Dropzone';
 
 dayjs.extend(weekdayPlugin);
 dayjs.extend(objectPlugin);
@@ -118,13 +119,13 @@ export const Calendar = () => {
     arrayOfDays.forEach((week, index) => {
       week.dates.forEach(({ day, isCurrentMonth, isCurrentDay }, idx) => {
         days.push(
-          <div
+          <Dropzone
             className={`col cell ${isCurrentDay ? 'selected' : isCurrentMonth ? '' : 'disabled'}`}
             key={`${idx}-${i++}`}
           >
             <span className="number">{day}</span>
             <span className="bg">{day}</span>
-          </div>,
+          </Dropzone>,
         );
       });
       rows.push(

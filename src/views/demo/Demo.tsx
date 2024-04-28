@@ -6,6 +6,7 @@ import { Calendar } from '../../components/Calendar';
 
 import { ActivitiesCheckbox } from '../../components/Activities';
 import { EditOptions } from '../../components/EditOptions';
+import { Draggable } from '../../components/Draggable';
 
 export const Demo = () => {
   return (
@@ -19,6 +20,7 @@ export const Demo = () => {
           <EditOptions>
             <ActivitiesCheckbox />
           </EditOptions>
+          <Draggable text="Drag me" />
         </Panel>
         <Panel
           panelHeight="100%"
