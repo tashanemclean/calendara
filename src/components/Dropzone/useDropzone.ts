@@ -1,24 +1,24 @@
 import { useCallback, useState } from 'react';
 import type { DragTypes, TextDropItem } from 'react-aria-components';
 
-import { DropEvent } from './types';
+import { dragTypeConstant, DropEvent, errorToastEnum } from './types';
 import useCustomToast from '../../utils/useCustomToast';
 
 const useDropzone = () => {
   const [dropped, setDropped] = useState<string[]>([]);
   const { errorToast } = useCustomToast();
 
-  const getDropOperation = (types: DragTypes) => (types.has('text/plain') ? 'copy' : 'cancel');
+  const getDropOperation = (types: DragTypes) => (types.has(dragTypeConstant.text) ? 'copy' : 'cancel');
 
   const onDrop = async (e: DropEvent) => {
     // short circuit if trying to add more than 5 items per cell
     if (isMaximumDropped()) {
-      errorToast('Maximum number of activities for a given day selected.');
+      errorToast(errorToastEnum.maximum);
       return;
     }
     // ensure that we selected the correct elements
-    const filtered = e.items.filter((item) => item.kind === 'text' && item.types.has('text/plain'));
-    const items = await Promise.all((filtered as TextDropItem[]).map((items) => items.getText('text/plain')));
+    const filtered = e.items.filter((item) => item.kind === 'text' && item.types.has(dragTypeConstant.text));
+    const items = await Promise.all((filtered as TextDropItem[]).map((items) => items.getText(dragTypeConstant.text)));
     // ensure we include the previous elements with the new item(s) selected
     const list = [...dropped, ...items];
     setDropped(list);

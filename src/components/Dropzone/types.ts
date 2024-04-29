@@ -15,3 +15,11 @@ export interface DropEvent extends DragDropEvent {
   /** The dropped items. */
   items: DropItem[];
 }
+
+export const dragTypeConstant = {
+  text: 'text/plain',
+} as const;
+
+export const errorToastEnum = {
+  maximum: 'Maximum number of activities for a given day selected.',
+} as const;
