@@ -10,7 +10,7 @@ import { screen } from '../../constants/screen';
 import useDemo from '../../hooks/useDemo';
 
 export const Demo = () => {
-  const { draggableData } = useDemo();
+  const { draggableData, editOptionsActive } = useDemo();
 
   const renderDraggable = () =>
     draggableData.map((data, key) => (
@@ -31,7 +31,7 @@ export const Demo = () => {
           <EditOptions>
             <ActivitiesCheckbox />
           </EditOptions>
-          {renderDraggable()}
+          {!editOptionsActive && renderDraggable()}
         </Panel>
         <Panel
           panelHeight="100%"
