@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { ActivitiesCheckbox } from '../../components/Activities';
 import { Calendar } from '../../components/Calendar';
 import { Draggable } from '../../components/Draggable';
+import { CitySelect, StateSelect } from '../../components/Dropdown';
 import { EditOptions } from '../../components/EditOptions';
 import { Header } from '../../components/Header';
 import { Panel } from '../../components/Panel';
@@ -11,6 +13,8 @@ import useDemo from '../../hooks/useDemo';
 
 export const Demo = () => {
   const { draggableData, editOptionsActive } = useDemo();
+  const countryId = 233;
+  const [stateId, setStateId] = useState(0);
 
   const renderDraggable = () =>
     draggableData.map((data, key) => (
@@ -29,6 +33,32 @@ export const Demo = () => {
           panelWidth="25%"
         >
           <EditOptions>
+            <StateSelect
+              countryId={countryId}
+              containerClassName="form-group"
+              inputClassName="form-control"
+              onChange={(e) => {
+                setStateId(e.id);
+              }}
+              onTextChange={(e) => {
+                console.log(e);
+              }}
+              placeHolder="Select State"
+            />
+            <h6 className="mt-3 mb-3">City</h6>
+            <CitySelect
+              countryId={countryId}
+              stateId={stateId}
+              containerClassName="form-group"
+              inputClassName="form-control"
+              onChange={(e) => {
+                console.log(e);
+              }}
+              onTextChange={(e) => {
+                console.log(e);
+              }}
+              placeHolder="Select City"
+            />
             <ActivitiesCheckbox />
           </EditOptions>
           {!editOptionsActive && renderDraggable()}
