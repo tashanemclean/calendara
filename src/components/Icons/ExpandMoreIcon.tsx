@@ -1,11 +1,19 @@
-export const ExpandMoreIcon = ({ color = '' }: { color?: string }) => {
+import { SVGProps } from 'react';
+
+type Props = SVGProps<SVGSVGElement> & {
+  color?: string;
+  size?: string;
+};
+
+export const ExpandMoreIcon = ({ color = '', size = '24', ...rest }: Readonly<Props>) => {
   return (
     <svg
+      {...rest}
       id="fi_3426514"
       enableBackground="new 0 0 128 128"
-      height="24"
+      height={size}
       viewBox="0 0 128 128"
-      width="24"
+      width={size}
       fill={color}
       xmlns="http://www.w3.org/2000/svg"
     >

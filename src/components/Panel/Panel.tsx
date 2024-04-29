@@ -34,4 +34,5 @@ const Container = styled.div<{ $width?: string; $height?: string; $padding?: str
   @media (max-width: ${screen.mobile.max}px) {
     width: auto;
   }
+  overflow: scroll;
 `;

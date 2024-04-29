@@ -24,6 +24,14 @@ export const Demo = () => {
       />
     ));
 
+  const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (!value) {
+      setStateId(0);
+    }
+    return;
+  };
+
   return (
     <Container>
       <Header title="Calendara" />
@@ -33,32 +41,28 @@ export const Demo = () => {
           panelWidth="25%"
         >
           <EditOptions>
-            <StateSelect
-              countryId={countryId}
-              containerClassName="form-group"
-              inputClassName="form-control"
-              onChange={(e) => {
-                setStateId(e.id);
-              }}
-              onTextChange={(e) => {
-                console.log(e);
-              }}
-              placeHolder="Select State"
-            />
-            <h6 className="mt-3 mb-3">City</h6>
-            <CitySelect
-              countryId={countryId}
-              stateId={stateId}
-              containerClassName="form-group"
-              inputClassName="form-control"
-              onChange={(e) => {
-                console.log(e);
-              }}
-              onTextChange={(e) => {
-                console.log(e);
-              }}
-              placeHolder="Select City"
-            />
+            <GeoLocationContainer>
+              <StateSelect
+                countryId={countryId}
+                inputClassName="form-control"
+                onChange={(e) => {
+                  setStateId(e.id);
+                }}
+                onTextChange={onTextChange}
+                placeHolder="State"
+              />
+              <CitySelect
+                countryId={countryId}
+                stateId={stateId}
+                containerClassName="form-group"
+                inputClassName="form-control"
+                onChange={(e) => {
+                  console.log(e);
+                }}
+                onTextChange={onTextChange}
+                placeHolder="City"
+              />
+            </GeoLocationContainer>
             <ActivitiesCheckbox />
           </EditOptions>
           {!editOptionsActive && renderDraggable()}
@@ -101,3 +105,5 @@ const Section = styled.div`
     flex-direction: column;
   }
 `;
+
+const GeoLocationContainer = styled.span``;

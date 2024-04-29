@@ -19,10 +19,6 @@ export const ActivitiesCheckbox = ({ overrideColor }: RegionFilterProps) => {
   const [open, setOpen] = useState(false);
   // const { buttonRef, dropdownRef, style, checkboxItemsVM, handleChange } = useCategories();
   const dropdownRef = useRef(null);
-  const style = {
-    left: `8px`,
-    top: `40px`,
-  };
 
   const clickHandler = useCallback(() => {
     setOpen(!open);
@@ -55,10 +51,7 @@ export const ActivitiesCheckbox = ({ overrideColor }: RegionFilterProps) => {
           iconRight={<ExpandMoreIcon color={overrideColor ?? colors.Black[500]} />}
           overrideTextColor={colors.Black[500]}
         />
-        <CheckboxDropdown
-          ref={dropdownRef}
-          style={style}
-        >
+        <CheckboxDropdown ref={dropdownRef}>
           <SlideIn enter={open}>{renderActivityCheckbox()}</SlideIn>
         </CheckboxDropdown>
       </CheckboxContainer>
@@ -69,10 +62,8 @@ export const ActivitiesCheckbox = ({ overrideColor }: RegionFilterProps) => {
 const CheckboxContainer = styled.div``;
 
 const CheckboxDropdown = styled.div`
-  position: absolute;
+  position: relative;
   display: block;
   width: max-content;
-  top: 0px;
-  left: 0px;
   z-index: 100;
 `;

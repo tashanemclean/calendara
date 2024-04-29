@@ -3,9 +3,9 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { GetState } from '../../../services/geo';
 import { State } from '../../../services/types';
 import { GeoDropdown } from './GeoDropdown';
+import styled from 'styled-components';
 
 interface Props {
-  containerClassName?: string;
   inputClassName?: string;
   onChange?: (e: State) => void;
   onTextChange?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -15,7 +15,6 @@ interface Props {
 }
 
 export const StateSelect = ({
-  containerClassName,
   inputClassName,
   onTextChange,
   defaultValue,
@@ -32,24 +31,23 @@ export const StateSelect = ({
   }, [countryId]);
 
   return (
-    <>
-      <div
-        className={containerClassName}
-        style={{ position: 'relative' }}
-      >
-        <GeoDropdown
-          placeHolder={placeHolder}
-          options={states}
-          onChange={(value) => {
-            if (onChange) {
-              onChange(value as State);
-            }
-          }}
-          onTextChange={onTextChange}
-          defaultValue={defaultValue}
-          inputClassName={inputClassName}
-        />
-      </div>
-    </>
+    <InputContainer>
+      <GeoDropdown
+        placeHolder={placeHolder}
+        options={states}
+        onChange={(value) => {
+          if (onChange) {
+            onChange(value as State);
+          }
+        }}
+        onTextChange={onTextChange}
+        defaultValue={defaultValue}
+        inputClassName={inputClassName}
+      />
+    </InputContainer>
   );
 };
+
+const InputContainer = styled.div`
+  position: relative;
+`;

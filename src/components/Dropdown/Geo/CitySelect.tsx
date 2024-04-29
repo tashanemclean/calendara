@@ -3,6 +3,8 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { GetCity } from '../../../services/geo';
 import { City } from '../../../services/types';
 import { GeoDropdown } from './GeoDropdown';
+import styled from 'styled-components';
+import { TextMD } from '../../../typography';
 
 interface Props {
   containerClassName?: string;
@@ -16,7 +18,6 @@ interface Props {
 }
 
 export const CitySelect = ({
-  containerClassName,
   inputClassName,
   onTextChange,
   defaultValue,
@@ -27,31 +28,31 @@ export const CitySelect = ({
 }: Props) => {
   const [cities, setCities] = useState<City[]>([]);
   useEffect(() => {
-    if (countryId) {
-      const data = GetCity(countryId, stateId);
-      setCities(data);
+    if (!stateId) {
+      setCities([]);
     }
+    const data = GetCity(countryId, stateId);
+    setCities(data);
   }, [countryId, stateId]);
 
   return (
-    <>
-      <div
-        className={containerClassName}
-        style={{ position: 'relative' }}
-      >
-        <GeoDropdown
-          placeHolder={placeHolder}
-          options={cities}
-          onChange={(value) => {
-            if (onChange) {
-              onChange(value as City);
-            }
-          }}
-          onTextChange={onTextChange}
-          defaultValue={defaultValue}
-          inputClassName={inputClassName}
-        />
-      </div>
-    </>
+    <Container>
+      <GeoDropdown
+        placeHolder={placeHolder}
+        options={cities}
+        onChange={(value) => {
+          if (onChange) {
+            onChange(value as City);
+          }
+        }}
+        onTextChange={onTextChange}
+        defaultValue={defaultValue}
+        inputClassName={inputClassName}
+      />
+    </Container>
   );
 };
+
+const Container = styled.div<{ width?: string }>`
+  position: relative;
+`;

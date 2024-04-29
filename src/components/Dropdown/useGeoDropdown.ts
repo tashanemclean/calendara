@@ -1,6 +1,7 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, CSSProperties, useEffect, useRef, useState } from 'react';
 
 import { City, Country, State } from '../../services/types';
+import { colors } from '../../constants/colors';
 
 interface Props {
   defaultValue?: Country | State | City;
@@ -10,37 +11,21 @@ interface Props {
   onTextChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 const useGeoDropdown = ({ defaultValue, showFlag, options, onChange, onTextChange }: Props) => {
-  const [showMenu, setShowMenu] = useState(false);
+  const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState<Country | State | City>();
   const [searchValue, setSearchValue] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (defaultValue) setSelectedValue(defaultValue);
-  }, [defaultValue]);
-  useEffect(() => {
-    setSearchValue('');
-    if (showMenu && searchRef.current) {
-      searchRef.current.focus();
-    }
-  }, [showMenu]);
-
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (inputRef.current && !inputRef.current.contains(e.target as Element)) {
-        setShowMenu(false);
-      }
-    };
-
-    window.addEventListener('click', handler);
-    return () => {
-      window.removeEventListener('click', handler);
-    };
-  });
+  const inputStyles: CSSProperties = {
+    color: colors.Black[500],
+    backgroundColor: '#f9f9f9',
+    border: 'none',
+    fontFamily: '"Abril Fatface", serif',
+  };
 
   const handleInputClick = () => {
-    setShowMenu(true);
+    setOpen(true);
   };
 
   const getDisplay = () => {
@@ -77,16 +62,42 @@ const useGeoDropdown = ({ defaultValue, showFlag, options, onChange, onTextChang
     return options.filter((option) => option.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0);
   };
 
+  useEffect(() => {
+    if (defaultValue) setSelectedValue(defaultValue);
+  }, [defaultValue]);
+
+  useEffect(() => {
+    setSearchValue('');
+    if (open && searchRef.current) {
+      searchRef.current.focus();
+    }
+  }, [setOpen]);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (inputRef.current && !inputRef.current.contains(e.target as Element)) {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener('click', handler);
+    return () => {
+      window.removeEventListener('click', handler);
+    };
+  });
+
   return {
     inputRef,
     searchRef,
-    showMenu,
+    open,
+    inputStyles,
     getOptions,
     handleInputClick,
     onSearch,
     getDisplay,
     onItemClick,
     isSelected,
+    setOpen,
   };
 };
 
