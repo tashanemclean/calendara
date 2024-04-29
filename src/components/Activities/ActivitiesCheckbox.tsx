@@ -48,8 +48,8 @@ export const ActivitiesCheckbox = ({ overrideColor }: RegionFilterProps) => {
           className="activities-btn"
           text="Activities"
           onClick={clickHandler}
-          iconRight={<ExpandMoreIcon color={overrideColor ?? colors.Black[500]} />}
-          overrideTextColor={colors.Black[500]}
+          iconRight={<ExpandMoreIcon color={overrideColor ?? colors.Space[500]} />}
+          overrideTextColor={colors.Space[500]}
         />
         <CheckboxDropdown ref={dropdownRef}>
           <SlideIn enter={open}>{renderActivityCheckbox()}</SlideIn>

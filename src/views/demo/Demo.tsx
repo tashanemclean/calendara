@@ -15,6 +15,7 @@ export const Demo = () => {
   const { draggableData, editOptionsActive } = useDemo();
   const countryId = 233;
   const [stateId, setStateId] = useState(0);
+  const [cityId, setCityId] = useState(0);
 
   const renderDraggable = () =>
     draggableData.map((data, key) => (
@@ -57,7 +58,7 @@ export const Demo = () => {
                 containerClassName="form-group"
                 inputClassName="form-control"
                 onChange={(e) => {
-                  console.log(e);
+                  setCityId(e.id);
                 }}
                 onTextChange={onTextChange}
                 placeHolder="City"

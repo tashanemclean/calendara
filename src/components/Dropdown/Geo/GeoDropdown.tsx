@@ -52,7 +52,6 @@ export const GeoDropdown = ({ placeHolder, options, onChange, onTextChange, defa
         />
         <ExpandMoreIcon />
       </DropdownContainer>
-      {/* {open && ( */}
       <SlideIn enter={open}>
         {getOptions().map((option) => (
           <div
@@ -64,13 +63,13 @@ export const GeoDropdown = ({ placeHolder, options, onChange, onTextChange, defa
           </div>
         ))}
       </SlideIn>
-      {/* )} */}
     </ClickOutside>
   );
 };
 
 const DropdownContainer = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding-right: 20px;
   padding-left: 2px;

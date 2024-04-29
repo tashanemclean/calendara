@@ -61,6 +61,7 @@ const Title = styled.div`
   line-height: 44px;
   letter-spacing: 0em;
   text-align: left;
+  color: #1b383a;
 
   @media (max-width: ${screen.mobile.max}px) {
     font-size: 28px;
