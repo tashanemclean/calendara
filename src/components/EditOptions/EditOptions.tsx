@@ -4,6 +4,7 @@ import { useUserInterface } from '../../contexts/userInterfaceContext';
 import { EditIcon } from '../Icons';
 import styled from 'styled-components';
 import { colors } from '../../constants/colors';
+import { IconContainer } from '../../utils/common/style';
 
 export const EditOptions = ({ children }: { children: ReactNode }) => {
   const {
@@ -40,9 +41,3 @@ export const EditOptions = ({ children }: { children: ReactNode }) => {
     </>
   );
 };
-
-const IconContainer = styled.span`
-  &:hover svg {
-    fill: ${colors.Mustard[500]};
-  }
-`;

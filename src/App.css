@@ -44,14 +44,6 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 .icon {
   font-family: 'Material Icons', serif;
   font-style: normal;
@@ -125,6 +117,11 @@
   height: 79vh;
   background: var(--neutral-color);
   border: 1px solid var(--border-color);
+
+  -moz-user-select: none; /* firefox */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE*/
+  user-select: none; /* Standard syntax */
 }
 
 .calendar .header {

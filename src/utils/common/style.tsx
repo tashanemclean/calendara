@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { TextSM } from '../../typography';
+import { colors } from '../../constants/colors';
 
 export const ErrorMessageContainer = styled(TextSM.Medium)`
   min-height: 48px;
@@ -14,4 +15,10 @@ export const ErrorMessageContainer = styled(TextSM.Medium)`
   box-sizing: border-box;
   padding: 16px;
   margin: auto 0;
+`;
+
+export const IconContainer = styled.span`
+  &:hover svg {
+    fill: ${colors.Mustard[500]};
+  }
 `;
