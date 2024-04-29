@@ -1,10 +1,8 @@
 import { MouseEvent, ReactNode, useCallback } from 'react';
 
 import { useUserInterface } from '../../contexts/userInterfaceContext';
-import { EditIcon } from '../Icons';
-import styled from 'styled-components';
-import { colors } from '../../constants/colors';
 import { IconContainer } from '../../utils/common/style';
+import { EditIcon } from '../Icons';
 
 export const EditOptions = ({ children }: { children: ReactNode }) => {
   const {

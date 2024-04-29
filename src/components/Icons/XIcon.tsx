@@ -1,4 +1,4 @@
-import { HtmlHTMLAttributes, SVGProps } from 'react';
+import { SVGProps } from 'react';
 
 export const XIcon = (props: Readonly<SVGProps<SVGSVGElement>>) => {
   return (

@@ -2,8 +2,8 @@ import { ReactNode } from 'react';
 import { DropZone, Text } from 'react-aria-components';
 import styled from 'styled-components';
 
-import useDropzone from './useDropzone';
 import { XIcon } from '../Icons';
+import useDropzone from './useDropzone';
 
 export const Dropzone = ({ children, className }: { children: ReactNode; className?: string }) => {
   const { dropped, getDropOperation, onDrop, onRemove, truncate } = useDropzone();
