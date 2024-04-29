@@ -236,3 +236,11 @@
   flex-basis: calc(100% / 7);
   width: calc(100% / 7);
 }
+
+.dropped-item svg {
+  display: none;
+}
+
+.dropped-item:hover svg {
+  display: inline;
+}

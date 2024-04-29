@@ -3,6 +3,7 @@ import { DropZone, Text } from 'react-aria-components';
 import styled from 'styled-components';
 
 import useDropzone from './useDropzone';
+import { XIcon } from '../Icons';
 
 export const Dropzone = ({ children, className }: { children: ReactNode; className?: string }) => {
   const { dropped, getDropOperation, onDrop, onRemove } = useDropzone();
@@ -13,9 +14,10 @@ export const Dropzone = ({ children, className }: { children: ReactNode; classNa
         <Text
           slot={`${key}`}
           key={`${item + key}`}
+          className="dropped-item"
         >
           {item}
-          <span onClick={() => onRemove(item)}>X</span>
+          <XIcon onClick={() => onRemove(item)} />
         </Text>
       ))}
     </DroppedItemContainer>
