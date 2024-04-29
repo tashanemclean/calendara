@@ -20,7 +20,7 @@ export const Demo = () => {
           <EditOptions>
             <ActivitiesCheckbox />
           </EditOptions>
-          <Draggable text="Drag me some really long text thats obviously too long to fit in the field completely" />
+          <Draggable text="Drag me " />
           <Draggable text="Drag me 2" />
         </Panel>
         <Panel
