@@ -17,7 +17,7 @@ export const Dropzone = ({ children, className }: { children: ReactNode; classNa
           className="dropped-item"
         >
           {truncate(item)}
-          <XIcon onClick={() => onRemove(item)} />
+          <XIcon onClick={() => onRemove(key)} />
         </Text>
       ))}
     </DroppedItemContainer>

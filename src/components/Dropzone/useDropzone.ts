@@ -24,13 +24,16 @@ const useDropzone = () => {
     setDropped(list);
   };
 
-  const onRemove = (slot: string) => {
+  const onRemove = (slot: number) => {
     // find item from dropped list
-    const item = dropped.find((x) => x === slot);
+    const item = dropped.find((_, idx) => idx === slot);
     if (!item) return;
     // clone to not modify original state, and filter item selected
     const copy = [...dropped];
-    const arr = copy.filter((x) => x !== item);
+    // divide the copy into two parts, 0 - till element before the slot index
+    // slice copy from 4th index position till the end of array.
+    // join result then update state
+    const arr = copy.slice(0, slot).concat(copy.slice(slot + 1));
     setDropped(arr);
   };
 
