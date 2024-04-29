@@ -1,13 +1,14 @@
-import { ChangeEvent, CSSProperties } from 'react';
-
-import { City, Country, State } from '../../../services/types';
-import useGeoDropdown from '../useGeoDropdown';
-import { TextInput } from '../../TextInput';
-import { ExpandMoreIcon } from '../../Icons';
+import { ChangeEvent } from 'react';
 import styled from 'styled-components';
-import { SlideIn } from '../../Transitions/SlideIn';
+
 import { colors } from '../../../constants/colors';
+import { City, Country, State } from '../../../services/types';
+import { IconContainer } from '../../../utils/common/style';
+import { ExpandMoreIcon } from '../../Icons';
+import { TextInput } from '../../TextInput';
+import { SlideIn } from '../../Transitions/SlideIn';
 import { ClickOutside } from '../ClickOutside';
+import useGeoDropdown from '../useGeoDropdown';
 
 interface Props {
   placeHolder?: string;
@@ -50,7 +51,9 @@ export const GeoDropdown = ({ placeHolder, options, onChange, onTextChange, defa
           width={'50%'}
           style={inputStyles}
         />
-        <ExpandMoreIcon />
+        <IconContainer>
+          <ExpandMoreIcon />
+        </IconContainer>
       </DropdownContainer>
       <SlideIn enter={open}>
         {getOptions().map((option) => (

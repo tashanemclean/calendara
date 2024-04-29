@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 
 import { ActivitiesCheckbox } from '../../components/Activities';
@@ -12,10 +11,8 @@ import { screen } from '../../constants/screen';
 import useDemo from '../../hooks/useDemo';
 
 export const Demo = () => {
-  const { draggableData, editOptionsActive } = useDemo();
-  const countryId = 233;
-  const [stateId, setStateId] = useState(0);
-  const [cityId, setCityId] = useState(0);
+  const { cityId, countryId, draggableData, editOptionsActive, stateId, onTextChange, onCityChange, onStateChange } =
+    useDemo();
 
   const renderDraggable = () =>
     draggableData.map((data, key) => (
@@ -24,15 +21,6 @@ export const Demo = () => {
         text={data}
       />
     ));
-
-  const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (!value) {
-      setStateId(0);
-    }
-    return;
-  };
-
   return (
     <Container>
       <Header title="Calendara" />
@@ -42,28 +30,22 @@ export const Demo = () => {
           panelWidth="25%"
         >
           <EditOptions>
-            <GeoLocationContainer>
-              <StateSelect
-                countryId={countryId}
-                inputClassName="form-control"
-                onChange={(e) => {
-                  setStateId(e.id);
-                }}
-                onTextChange={onTextChange}
-                placeHolder="State"
-              />
-              <CitySelect
-                countryId={countryId}
-                stateId={stateId}
-                containerClassName="form-group"
-                inputClassName="form-control"
-                onChange={(e) => {
-                  setCityId(e.id);
-                }}
-                onTextChange={onTextChange}
-                placeHolder="City"
-              />
-            </GeoLocationContainer>
+            <StateSelect
+              countryId={countryId}
+              inputClassName="form-control"
+              onChange={onStateChange}
+              onTextChange={onTextChange}
+              placeHolder="State"
+            />
+            <CitySelect
+              countryId={countryId}
+              stateId={stateId}
+              containerClassName="form-group"
+              inputClassName="form-control"
+              onChange={onCityChange}
+              onTextChange={onTextChange}
+              placeHolder="City"
+            />
             <ActivitiesCheckbox />
           </EditOptions>
           {!editOptionsActive && renderDraggable()}
@@ -106,5 +88,3 @@ const Section = styled.div`
     flex-direction: column;
   }
 `;
-
-const GeoLocationContainer = styled.span``;

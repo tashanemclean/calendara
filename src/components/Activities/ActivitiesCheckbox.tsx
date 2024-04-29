@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { colors } from '../../constants/colors';
+import { IconContainer } from '../../utils/common/style';
 import { TextButton } from '../Buttons';
 import { Checkbox } from '../Checkbox';
 import { ClickOutside } from '../Dropdown';
@@ -13,7 +14,7 @@ interface RegionFilterProps {
   singleFilter?: boolean;
 }
 
-const items = ['Soccer', 'Basketball'];
+const items = ['Free', 'Paid'];
 
 export const ActivitiesCheckbox = ({ overrideColor }: RegionFilterProps) => {
   const [open, setOpen] = useState(false);
@@ -48,7 +49,11 @@ export const ActivitiesCheckbox = ({ overrideColor }: RegionFilterProps) => {
           className="activities-btn"
           text="Activities"
           onClick={clickHandler}
-          iconRight={<ExpandMoreIcon color={overrideColor ?? colors.Space[500]} />}
+          iconRight={
+            <IconContainer>
+              <ExpandMoreIcon color={overrideColor ?? colors.Space[500]} />
+            </IconContainer>
+          }
           overrideTextColor={colors.Space[500]}
         />
         <CheckboxDropdown ref={dropdownRef}>

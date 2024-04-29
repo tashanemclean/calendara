@@ -1,7 +1,7 @@
 import { ChangeEvent, CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 
-import { City, Country, State } from '../../services/types';
 import { colors } from '../../constants/colors';
+import { City, Country, State } from '../../services/types';
 
 interface Props {
   defaultValue?: Country | State | City;
@@ -75,7 +75,7 @@ const useGeoDropdown = ({ defaultValue, showFlag, options, onChange, onTextChang
     if (open && searchRef.current) {
       searchRef.current.focus();
     }
-  }, [setOpen]);
+  }, [open, setOpen]);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {

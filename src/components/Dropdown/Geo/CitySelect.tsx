@@ -1,9 +1,9 @@
 import { ChangeEvent, useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 import { GetCity } from '../../../services/geo';
 import { City } from '../../../services/types';
 import { GeoDropdown } from './GeoDropdown';
-import styled from 'styled-components';
 
 interface Props {
   containerClassName?: string;

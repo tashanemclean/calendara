@@ -5,7 +5,7 @@ type Props = SVGProps<SVGSVGElement> & {
   size?: string;
 };
 
-export const ExpandMoreIcon = ({ color = '', size = '24', ...rest }: Readonly<Props>) => {
+export const ExpandMoreIcon = ({ color = '', size = '15', ...rest }: Readonly<Props>) => {
   return (
     <svg
       {...rest}
