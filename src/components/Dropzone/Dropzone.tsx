@@ -6,7 +6,7 @@ import useDropzone from './useDropzone';
 import { XIcon } from '../Icons';
 
 export const Dropzone = ({ children, className }: { children: ReactNode; className?: string }) => {
-  const { dropped, getDropOperation, onDrop, onRemove } = useDropzone();
+  const { dropped, getDropOperation, onDrop, onRemove, truncate } = useDropzone();
 
   const renderDropped = () => (
     <DroppedItemContainer>
@@ -16,7 +16,7 @@ export const Dropzone = ({ children, className }: { children: ReactNode; classNa
           key={`${item + key}`}
           className="dropped-item"
         >
-          {item}
+          {truncate(item)}
           <XIcon onClick={() => onRemove(item)} />
         </Text>
       ))}

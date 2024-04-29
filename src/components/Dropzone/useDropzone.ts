@@ -27,11 +27,16 @@ const useDropzone = () => {
     setDropped(arr);
   };
 
+  const truncate = (text: string) => {
+    return text.length > 20 ? `${text.substring(0, 20)}...` : text;
+  };
+
   return {
     dropped,
     getDropOperation,
     onDrop,
     onRemove,
+    truncate,
   };
 };
 
