@@ -1,4 +1,4 @@
-import { ChangeEvent, CSSProperties, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 
 import { City, Country, State } from '../../services/types';
 import { colors } from '../../constants/colors';
@@ -18,14 +18,14 @@ const useGeoDropdown = ({ defaultValue, showFlag, options, onChange, onTextChang
   const inputRef = useRef<HTMLDivElement>(null);
 
   const inputStyles: CSSProperties = {
-    color: colors.Black[500],
+    color: colors.Space[500],
     backgroundColor: '#f9f9f9',
     border: 'none',
     fontFamily: '"Abril Fatface", serif',
   };
 
   const handleInputClick = () => {
-    setOpen(true);
+    setOpen(!open);
   };
 
   const getDisplay = () => {
@@ -62,6 +62,10 @@ const useGeoDropdown = ({ defaultValue, showFlag, options, onChange, onTextChang
     return options.filter((option) => option.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0);
   };
 
+  const clickHandler = useCallback(() => {
+    setOpen(!open);
+  }, [open, setOpen]);
+
   useEffect(() => {
     if (defaultValue) setSelectedValue(defaultValue);
   }, [defaultValue]);
@@ -97,7 +101,7 @@ const useGeoDropdown = ({ defaultValue, showFlag, options, onChange, onTextChang
     getDisplay,
     onItemClick,
     isSelected,
-    setOpen,
+    clickHandler,
   };
 };
 

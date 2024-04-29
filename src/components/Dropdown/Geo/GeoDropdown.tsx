@@ -6,6 +6,8 @@ import { TextInput } from '../../TextInput';
 import { ExpandMoreIcon } from '../../Icons';
 import styled from 'styled-components';
 import { SlideIn } from '../../Transitions/SlideIn';
+import { colors } from '../../../constants/colors';
+import { ClickOutside } from '../ClickOutside';
 
 interface Props {
   placeHolder?: string;
@@ -18,11 +20,24 @@ interface Props {
 }
 
 export const GeoDropdown = ({ placeHolder, options, onChange, onTextChange, defaultValue, showFlag = true }: Props) => {
-  const { inputRef, searchRef, open, inputStyles, getOptions, onItemClick, getDisplay, onSearch, handleInputClick } =
-    useGeoDropdown({ defaultValue, showFlag, options, onChange, onTextChange });
+  const {
+    inputRef,
+    searchRef,
+    open,
+    inputStyles,
+    clickHandler,
+    getOptions,
+    onItemClick,
+    getDisplay,
+    onSearch,
+    handleInputClick,
+  } = useGeoDropdown({ defaultValue, showFlag, options, onChange, onTextChange });
 
   return (
-    <>
+    <ClickOutside
+      enabled={open}
+      onClick={clickHandler}
+    >
       <DropdownContainer
         ref={inputRef}
         onClick={handleInputClick}
@@ -37,20 +52,20 @@ export const GeoDropdown = ({ placeHolder, options, onChange, onTextChange, defa
         />
         <ExpandMoreIcon />
       </DropdownContainer>
-      {open && (
-        <SlideIn enter={open}>
-          {getOptions().map((option) => (
-            <div
-              onClick={() => onItemClick(option)}
-              key={option.id}
-            >
-              {showFlag && <span>{'emoji' in option ? option.emoji : ''}</span>}
-              <span style={{ cursor: 'pointer' }}>{option.name}</span>
-            </div>
-          ))}
-        </SlideIn>
-      )}
-    </>
+      {/* {open && ( */}
+      <SlideIn enter={open}>
+        {getOptions().map((option) => (
+          <div
+            onClick={() => onItemClick(option)}
+            key={option.id}
+          >
+            {showFlag && <span>{'emoji' in option ? option.emoji : ''}</span>}
+            <OptionName>{option.name}</OptionName>
+          </div>
+        ))}
+      </SlideIn>
+      {/* )} */}
+    </ClickOutside>
   );
 };
 
@@ -59,4 +74,13 @@ const DropdownContainer = styled.div`
   justify-content: space-between;
   padding-right: 20px;
   padding-left: 2px;
+`;
+
+const OptionName = styled.div`
+  cursor: pointer;
+  color: ${colors.gray};
+
+  &:hover {
+    color: ${colors.Mustard[500]};
+  }
 `;

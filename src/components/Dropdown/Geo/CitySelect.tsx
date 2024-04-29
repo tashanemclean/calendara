@@ -4,7 +4,6 @@ import { GetCity } from '../../../services/geo';
 import { City } from '../../../services/types';
 import { GeoDropdown } from './GeoDropdown';
 import styled from 'styled-components';
-import { TextMD } from '../../../typography';
 
 interface Props {
   containerClassName?: string;
