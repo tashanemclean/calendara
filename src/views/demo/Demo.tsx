@@ -7,8 +7,19 @@ import { EditOptions } from '../../components/EditOptions';
 import { Header } from '../../components/Header';
 import { Panel } from '../../components/Panel';
 import { screen } from '../../constants/screen';
+import useDemo from '../../hooks/useDemo';
 
 export const Demo = () => {
+  const { draggableData } = useDemo();
+
+  const renderDraggable = () =>
+    draggableData.map((data, key) => (
+      <Draggable
+        key={`${data + key}`}
+        text={data}
+      />
+    ));
+
   return (
     <Container>
       <Header title="Calendara" />
@@ -20,8 +31,7 @@ export const Demo = () => {
           <EditOptions>
             <ActivitiesCheckbox />
           </EditOptions>
-          <Draggable text="Drag me " />
-          <Draggable text="Drag me 2" />
+          {renderDraggable()}
         </Panel>
         <Panel
           panelHeight="100%"
