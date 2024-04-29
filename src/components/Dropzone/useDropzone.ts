@@ -31,7 +31,7 @@ const useDropzone = () => {
     // clone to not modify original state, and filter item selected
     const copy = [...dropped];
     // divide the copy into two parts, 0 - till element before the slot index
-    // slice copy from 4th index position till the end of array.
+    // slice copy from slot index position till the end of array.
     // join result then update state
     const arr = copy.slice(0, slot).concat(copy.slice(slot + 1));
     setDropped(arr);
