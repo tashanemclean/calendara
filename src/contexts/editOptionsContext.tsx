@@ -4,24 +4,25 @@ import editOptionsReducer, { EditOptionsActionTypes, EditOptionsState, initialSt
 import { toStoredItemsVM } from '../utils/adapters';
 import { useDropdownContext } from './dropdownItemsContext';
 import { DropdownItem } from '../utils/type';
+import { City, State } from '../services/types';
 
 interface EditOptionsContextActions {
-  modifyCity: (city: string) => void;
-  modifyStateUpdate: (state: string) => void;
   modifyActivity: (activity: string[]) => void;
   modifyCategories: (categories: string[]) => void;
   onActivityChange: (activity: Record<string, DropdownItem>) => void;
   onCategoriesChange: (categories: Record<string, DropdownItem>) => void;
+  onCityChange: (city: City) => void;
+  onStateChange: (state: State) => void;
   submit: () => Promise<void>;
 }
 
 const initialContext: EditOptionsContextActions = {
-  modifyCity: () => {},
-  modifyStateUpdate: () => {},
   modifyActivity: () => null,
   modifyCategories: () => null,
   onActivityChange: () => {},
   onCategoriesChange: () => {},
+  onCityChange: () => {},
+  onStateChange: () => {},
   submit: async () => {},
 };
 
@@ -37,7 +38,7 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
   const [state, dispatch] = useReducer(editOptionsReducer, initialState);
   const {
     actions: { modify },
-    state: { activitiesIds, categoriesIds },
+    state: { activitiesIds, categoriesIds, storedCity, storedState },
   } = useDropdownContext();
   const activityItems = useMemo(
     () => [
@@ -72,16 +73,10 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
   const modifyActivity = (activity: string[]) => {
     dispatch({ type: EditOptionsActionTypes.UPDATE_ACTIVITY_SUCCESS, payload: activity });
   };
-  const modifyCity = (city: string) => {
-    dispatch({ type: EditOptionsActionTypes.UPDATE_CITY_SUCCESS, payload: city });
-  };
+
   const modifyCategories = (categories: string[]) => {
     dispatch({ type: EditOptionsActionTypes.UPDATE_CATEGORIES_SUCCESS, payload: categories });
   };
-  const modifyStateUpdate = (state: string) => {
-    dispatch({ type: EditOptionsActionTypes.UPDATE_STATE_SUCCESS, payload: state });
-  };
-
   const onActivityChange = useCallback(
     ({ selected }: Record<string, DropdownItem>) => {
       dispatch({ type: EditOptionsActionTypes.UPDATE_ACTIVITY_INIT });
@@ -95,17 +90,25 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
       if (active) {
         copy[index] = { ...item, active: false };
         const ids = toActiveIds(copy);
-        modify(ids, 'activitiesIds');
+        modify(ids, 'activitiesIds', 'UPDATE_STORED_A_ITEMS');
         modifyActivity(ids);
       } else if (!active) {
         copy[index] = { ...item, active: true };
         const ids = toActiveIds(copy);
-        modify(ids, 'activitiesIds');
+        modify(ids, 'activitiesIds', 'UPDATE_STORED_A_ITEMS');
         modifyActivity(ids);
       }
     },
     [dropdownActivitiesVM, modify],
   );
+
+  const onCityChange = useCallback((city: City) => {
+    modify(city, 'city', 'UPDATE_STORED_CITY_ITEMS');
+  }, []);
+
+  const onStateChange = useCallback((state: State) => {
+    modify(state, 'storedState', 'UPDATE_STORED_STATE_ITEMS');
+  }, []);
 
   const onCategoriesChange = useCallback(
     ({ selected }: Record<string, DropdownItem>) => {
@@ -120,12 +123,12 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
       if (active) {
         copy[index] = { ...item, active: false };
         const ids = toActiveIds(copy);
-        modify(ids, 'categoriesIds');
+        modify(ids, 'categoriesIds', 'UPDATE_STORED_B_ITEMS');
         modifyCategories(ids);
       } else if (!active) {
         copy[index] = { ...item, active: true };
         const ids = toActiveIds(copy);
-        modify(ids, 'categoriesIds');
+        modify(ids, 'categoriesIds', 'UPDATE_STORED_B_ITEMS');
         modifyCategories(ids);
       }
     },
@@ -144,21 +147,26 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
         ...initialContext,
         modifyActivity,
         modifyCategories,
-        modifyCity,
-        modifyStateUpdate,
         onActivityChange,
         onCategoriesChange,
+        onCityChange,
+        onStateChange,
       },
     }),
-    [state, modifyCategories, modifyCity, modifyStateUpdate, onActivityChange, onCategoriesChange],
+    [state, modifyCategories, onActivityChange, onCategoriesChange, onCityChange, onStateChange],
   );
 
   useEffect(() => {
     dispatch({
       type: EditOptionsActionTypes.UPDATE_STORED_DROPDOWN,
-      payload: { activities: dropdownActivitiesVM, categories: dropdownCategoriesVM },
+      payload: {
+        activities: dropdownActivitiesVM,
+        categories: dropdownCategoriesVM,
+        storedState,
+        storedCity,
+      },
     });
-  }, [dropdownActivitiesVM, dropdownCategoriesVM]);
+  }, [dropdownActivitiesVM, dropdownCategoriesVM, storedCity, storedState]);
 
   return <EditOptionsContext.Provider value={value}>{children}</EditOptionsContext.Provider>;
 }

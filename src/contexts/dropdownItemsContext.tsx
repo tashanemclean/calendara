@@ -1,13 +1,20 @@
 import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useReducer } from 'react';
-import { DropdownItem } from '../utils/type';
-import dropdownReducer, { DropdownActionTypes, DropdownState, initialState } from '../reducers/dropdown';
+import dropdownReducer, {
+  DropdownActionTypes,
+  DropdownState,
+  initialState,
+  UPDATE_STORED_ITEM_TYPE,
+} from '../reducers/dropdown';
 import { useLocalStorage } from '@lilib/hooks';
+import { City, State } from '../services/types';
 
 interface DropdownActions {
-  modify: (item: string[], key: string) => void;
+  modify: (item: string[] | City | State, key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => void;
+  clear: (key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => void;
 }
 
 const initialContext: DropdownActions = {
+  clear: () => {},
   modify: () => {},
 };
 
@@ -23,24 +30,32 @@ export function StoredDropdownProvider({ children }: Readonly<{ children: ReactN
   const [persistedItems, setPersistedItems] = useLocalStorage<{
     activitiesIds?: string[] | null;
     categoriesIds?: string[] | null;
+    storedState?: State | null;
+    storedCity?: City | null;
   }>('act-cat');
 
   const modify = useCallback(
-    (item: string[], key: string) => {
-      dispatch({ type: DropdownActionTypes.UPDATE_STORED_A_ITEMS, payload: { [key]: item } });
+    (item: string[] | State | City, key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => {
+      dispatch({ type: DropdownActionTypes[type], payload: { [key]: item } });
       setPersistedItems({ ...persistedItems, [key]: item });
     },
     [persistedItems, setPersistedItems],
   );
 
+  const clear = (key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => {
+    dispatch({ type: DropdownActionTypes[type], payload: { [key]: null } });
+    setPersistedItems({ ...persistedItems, [key]: null });
+  };
+
   const value = useMemo(
     () => ({
       state,
       actions: {
+        clear,
         modify,
       },
     }),
-    [state, modify],
+    [state, clear, modify],
   );
 
   useEffect(() => {

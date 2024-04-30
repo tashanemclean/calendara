@@ -11,6 +11,7 @@ import { screen } from '../../constants/screen';
 import useDemo from '../../hooks/useDemo';
 import { CategoriesCheckbox } from '../../components/Categories';
 import { Button } from '../../components/Buttons';
+import { City, State } from '../../services/types';
 
 export const Demo = () => {
   const {
@@ -19,10 +20,11 @@ export const Demo = () => {
     draggableData,
     editOptionsActive,
     stateId,
+    storageVM: [vm],
     onSubmit,
     onTextChange,
-    onCityChange,
-    onStateChange,
+    handleCityChange,
+    handleStateChange,
   } = useDemo();
 
   const renderDraggable = () =>
@@ -44,14 +46,14 @@ export const Demo = () => {
           <EditOptions>
             <StateSelect
               countryId={countryId}
-              onChange={onStateChange}
+              onChange={handleStateChange}
               onTextChange={onTextChange}
               placeHolder="State"
             />
             <CitySelect
               countryId={countryId}
               stateId={stateId}
-              onChange={onCityChange}
+              onChange={handleCityChange}
               onTextChange={onTextChange}
               placeHolder="City"
             />

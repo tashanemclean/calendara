@@ -1,8 +1,9 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { useUserInterface } from '../contexts/userInterfaceContext';
 import { City, State } from '../services/types';
 import { useEditOptionsContext } from '../contexts/editOptionsContext';
+import { useDropdownContext } from '../contexts/dropdownItemsContext';
 
 const useDemo = () => {
   const {
@@ -10,9 +11,12 @@ const useDemo = () => {
     state: { editOptionsActive },
   } = useUserInterface();
   const {
-    actions: { modifyActivity, modifyCategories, modifyCity, modifyStateUpdate },
+    actions: { onCityChange, onStateChange },
     state,
   } = useEditOptionsContext();
+  const {
+    actions: { clear },
+  } = useDropdownContext();
   const draggableData = ['Drag me ', 'Drag me 2'];
 
   const countryId = 233;
@@ -26,14 +30,16 @@ const useDemo = () => {
     return;
   };
 
-  const onStateChange = (selected: State) => {
+  const handleStateChange = (selected: State) => {
     setStateId(selected.id);
-    modifyStateUpdate(selected.name);
+    onStateChange(selected);
+    // optimistically reset previous city
+    // clear('city', 'UPDATE_STORED_CITY_ITEMS');
   };
 
-  const onCityChange = (selected: City) => {
+  const handleCityChange = (selected: City) => {
     setCityId(selected.id);
-    modifyCity(selected.name);
+    onCityChange(selected);
   };
 
   const onCloseOptions = useCallback(() => {
@@ -45,18 +51,28 @@ const useDemo = () => {
     onCloseOptions();
   };
 
+  const storageVM = useMemo(
+    () => [
+      {
+        storedCity: state.dropdownItemsVM.storedCity,
+        storedState: state.dropdownItemsVM.storedState,
+      },
+    ],
+    [state.dropdownItemsVM.storedCity, state.dropdownItemsVM.storedState],
+  );
+
   return {
     cityId,
     countryId,
     draggableData,
     editOptionsActive,
     stateId,
+    storageVM,
     onSubmit,
-    onCityChange,
     onTextChange,
     setCityId,
-    onStateChange,
-    ...state,
+    handleCityChange,
+    handleStateChange,
   };
 };
 
