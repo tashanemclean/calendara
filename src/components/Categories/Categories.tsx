@@ -7,15 +7,15 @@ import { Checkbox } from '../Checkbox';
 import { ClickOutside } from '../Dropdown';
 import { ExpandMoreIcon } from '../Icons';
 import { SlideIn } from '../Transitions/SlideIn';
-import useActivities from './useActivities';
+import useCategories from './useCategories';
 
 interface RegionFilterProps {
   overrideColor?: string;
   singleFilter?: boolean;
 }
 
-export const ActivitiesCheckbox = ({ overrideColor }: RegionFilterProps) => {
-  const { dropdownRef, items, open, clickHandler, closeHandler, onUpdate } = useActivities();
+export const CategoriesCheckbox = ({ overrideColor }: RegionFilterProps) => {
+  const { open, dropdownRef, items, closeHandler, clickHandler, onUpdate } = useCategories();
 
   const renderCheckbox = () => (
     <Checkbox
@@ -32,7 +32,7 @@ export const ActivitiesCheckbox = ({ overrideColor }: RegionFilterProps) => {
       <CheckboxContainer>
         <TextButton
           className="checkbox-btn"
-          text="Activity"
+          text="Categories"
           onClick={clickHandler}
           iconRight={
             <IconContainer>

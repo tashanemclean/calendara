@@ -8,6 +8,7 @@ export const TextMD = {
     line-height: 24px;
     letter-spacing: 0em;
     text-align: left;
+    color: #1b383a;
   `,
   Medium: styled.div`
     font-family: 'Montserrat', sans-serif;

@@ -30,7 +30,7 @@ export const EditOptions = ({ children }: { children: ReactNode }) => {
       {!editOptionsActive && (
         <IconContainer
           onClick={onToggle}
-          style={{ cursor: 'pointer', float: 'right' }}
+          style={{ cursor: 'pointer', marginLeft: 'auto' }}
         >
           <EditIcon />
         </IconContainer>

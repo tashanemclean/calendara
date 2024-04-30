@@ -1,38 +1,33 @@
-import { forwardRef, InputHTMLAttributes, useState } from 'react';
+import { forwardRef, InputHTMLAttributes, MouseEvent, useState } from 'react';
 import styled from 'styled-components';
 
 import { colors } from '../../constants/colors';
 import { TextMD, TextSM } from '../../typography';
+import { DropdownItem } from '../../utils/type';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  name?: string;
-  text?: string;
-  caption?: string;
-  value?: string;
-  disabled?: boolean;
+interface Props {
+  items: DropdownItem[];
+  onClick: (item: DropdownItem) => void;
 }
 
-export const Checkbox = forwardRef<HTMLInputElement, Props>(({ name, text, caption, value, disabled }: Props, ref) => {
-  const [checked, setIsChecked] = useState(false);
-  const onToggle = () => {
-    setIsChecked(!checked);
-  };
+export const Checkbox = forwardRef<HTMLInputElement, Props>(({ items, onClick }: Props, ref) => {
   return (
-    <Container>
-      <Input
-        type="checkbox"
-        name={name}
-        value={value}
-        checked={checked}
-        disabled={disabled}
-        onChange={onToggle}
-        ref={ref}
-      />
-      <LabelContainer>
-        {text ? <TextMD.Medium>{text}</TextMD.Medium> : null}
-        {caption ? <Caption>{caption}</Caption> : null}
-      </LabelContainer>
-    </Container>
+    <>
+      {items.map((item) => (
+        <Container key={item.id}>
+          <Input
+            type="checkbox"
+            name={item.name}
+            value={item.name}
+            checked={item.active}
+            readOnly
+            onClick={() => onClick(item)}
+            ref={ref}
+          />
+          <LabelContainer>{item.name ? <TextMD.Medium>{item.name}</TextMD.Medium> : null}</LabelContainer>
+        </Container>
+      ))}
+    </>
   );
 });
 Checkbox.displayName = 'Checkbox';

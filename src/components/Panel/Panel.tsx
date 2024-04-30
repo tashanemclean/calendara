@@ -23,6 +23,8 @@ export const Panel = ({ children, panelHeight, panelWidth, panelPadding }: Reado
 };
 
 const Container = styled.div<{ $width?: string; $height?: string; $padding?: string }>`
+  display: flex;
+  flex-direction: column;
   border-radius: 8px;
   border: solid 1px lightgray;
   background-color: #f9f9f9;

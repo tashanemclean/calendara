@@ -9,10 +9,21 @@ import { Header } from '../../components/Header';
 import { Panel } from '../../components/Panel';
 import { screen } from '../../constants/screen';
 import useDemo from '../../hooks/useDemo';
+import { CategoriesCheckbox } from '../../components/Categories';
+import { Button } from '../../components/Buttons';
 
 export const Demo = () => {
-  const { cityId, countryId, draggableData, editOptionsActive, stateId, onTextChange, onCityChange, onStateChange } =
-    useDemo();
+  const {
+    cityId,
+    countryId,
+    draggableData,
+    editOptionsActive,
+    stateId,
+    onSubmit,
+    onTextChange,
+    onCityChange,
+    onStateChange,
+  } = useDemo();
 
   const renderDraggable = () =>
     draggableData.map((data, key) => (
@@ -21,6 +32,7 @@ export const Demo = () => {
         text={data}
       />
     ));
+
   return (
     <Container>
       <Header title="Calendara" />
@@ -32,7 +44,6 @@ export const Demo = () => {
           <EditOptions>
             <StateSelect
               countryId={countryId}
-              inputClassName="form-control"
               onChange={onStateChange}
               onTextChange={onTextChange}
               placeHolder="State"
@@ -40,15 +51,49 @@ export const Demo = () => {
             <CitySelect
               countryId={countryId}
               stateId={stateId}
-              containerClassName="form-group"
-              inputClassName="form-control"
               onChange={onCityChange}
               onTextChange={onTextChange}
               placeHolder="City"
             />
             <ActivitiesCheckbox />
+            <CategoriesCheckbox />
+            {/* TODO: Refactor fields to use react hook form */}
+            {/* <FormManager
+              onSubmit={handleFind}
+              render={({ control, onSubmit }) => (
+                <>
+                  <CheckboxField
+                    items={activity}
+                    control={control}
+                    id="activity"
+                    label="Activity"
+                  />
+                  <CheckboxField
+                    items={categories}
+                    control={control}
+                    id="categories"
+                    label="Categories"
+                  />
+                  <Button
+                    onClick={onSubmit}
+                    type="submit"
+                    disabled={false}
+                  >
+                    {'Continue'}
+                  </Button>
+                </>
+              )}
+            /> */}
+            <Button
+              onClick={onSubmit}
+              type="submit"
+              disabled={false}
+              style={{ marginTop: 'auto', marginLeft: '20%' }}
+            >
+              Submit
+            </Button>
           </EditOptions>
-          {!editOptionsActive && renderDraggable()}
+          {!editOptionsActive && <DraggableContainer>{renderDraggable()}</DraggableContainer>}
         </Panel>
         <Panel
           panelHeight="100%"
@@ -88,3 +133,5 @@ const Section = styled.div`
     flex-direction: column;
   }
 `;
+
+const DraggableContainer = styled.div``;
