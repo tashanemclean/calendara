@@ -117,7 +117,6 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
       if (!item) return;
       const copy = [...(dropdownCategoriesVM ?? [])];
       const index = copy.findIndex((x) => x === item);
-      console.log(selected, '** selected');
       if (active) {
         copy[index] = { ...item, active: false };
         const ids = toActiveIds(copy);
@@ -148,6 +147,7 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
         modifyCity,
         modifyStateUpdate,
         onActivityChange,
+        onCategoriesChange,
       },
     }),
     [state, modifyCategories, modifyCity, modifyStateUpdate, onActivityChange, onCategoriesChange],
