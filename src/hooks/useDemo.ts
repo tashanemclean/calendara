@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useUserInterface } from '../contexts/userInterfaceContext';
 import { City, State } from '../services/types';
 import { useEditOptionsContext } from '../contexts/editOptionsContext';
-import { useDropdownContext } from '../contexts/dropdownItemsContext';
+import useDemoUow from './useDemoUow';
 
 const useDemo = () => {
   const {
@@ -14,9 +14,8 @@ const useDemo = () => {
     actions: { onCityChange, onStateChange },
     state,
   } = useEditOptionsContext();
-  const {
-    actions: { clear },
-  } = useDropdownContext();
+  const { storageVM, onGetResponses } = useDemoUow();
+
   const draggableData = ['Drag me ', 'Drag me 2'];
 
   const countryId = 233;
@@ -26,9 +25,6 @@ const useDemo = () => {
     const value = e.target.value;
     if (!value) {
       setStateId(0);
-      // optimistically reset storage if state cleared
-      // localStorage.removeItem('storedCity');
-      // localStorage.removeItem('storedState');
     }
     return;
   };
@@ -48,19 +44,9 @@ const useDemo = () => {
   }, [hideEditOptions]);
 
   const onSubmit = async () => {
-    console.log(state, '** all items');
+    await onGetResponses();
     onCloseOptions();
   };
-
-  const storageVM = useMemo(
-    () => [
-      {
-        storedCity: state.dropdownItemsVM.storedCity,
-        storedState: state.dropdownItemsVM.storedState,
-      },
-    ],
-    [state.dropdownItemsVM.storedCity, state.dropdownItemsVM.storedState],
-  );
 
   useEffect(() => {
     if (state.dropdownItemsVM.storedState) {

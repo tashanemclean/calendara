@@ -5,6 +5,7 @@ import { UserInterfaceProvider } from '../../contexts/userInterfaceContext';
 import { Demo } from './Demo';
 import { EditOptionsProvider } from '../../contexts/editOptionsContext';
 import { StoredDropdownProvider } from '../../contexts/dropdownItemsContext';
+import { ApiResponseProvider } from '../../contexts/apiContext';
 
 const Index = () => {
   return (
@@ -12,8 +13,10 @@ const Index = () => {
       <UserInterfaceProvider>
         <StoredDropdownProvider>
           <EditOptionsProvider>
-            <ToastContainer />
-            <Demo />
+            <ApiResponseProvider>
+              <ToastContainer />
+              <Demo />
+            </ApiResponseProvider>
           </EditOptionsProvider>
         </StoredDropdownProvider>
       </UserInterfaceProvider>

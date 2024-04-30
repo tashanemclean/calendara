@@ -1,5 +1,6 @@
 import { City, State } from '../services/types';
 
+export const STORAGE_KEYS: 'storedCity' | 'storedState' | 'activitiesIds' | 'categoriesIds' = 'storedCity' as const;
 export const UPDATE_STORED_ITEM_TYPE:
   | 'UPDATE_STORED_A_ITEMS'
   | 'UPDATE_STORED_B_ITEMS'

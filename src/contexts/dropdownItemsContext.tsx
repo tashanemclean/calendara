@@ -3,6 +3,7 @@ import dropdownReducer, {
   DropdownActionTypes,
   DropdownState,
   initialState,
+  STORAGE_KEYS,
   UPDATE_STORED_ITEM_TYPE,
 } from '../reducers/dropdown';
 import { useLocalStorage } from '@lilib/hooks';
@@ -12,7 +13,7 @@ interface DropdownActions {
   modify: (item: string[] | string, key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => void;
   modifyCity: (item: City) => void;
   modifyState: (item: State) => void;
-  clear: (key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => void;
+  clear: (key: typeof STORAGE_KEYS, type: typeof UPDATE_STORED_ITEM_TYPE) => void;
 }
 
 const initialContext: DropdownActions = {
@@ -62,7 +63,7 @@ export function StoredDropdownProvider({ children }: Readonly<{ children: ReactN
     [persistedItems, setPersistedItems],
   );
 
-  const clear = (key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => {
+  const clear = (key: typeof STORAGE_KEYS, type: typeof UPDATE_STORED_ITEM_TYPE) => {
     dispatch({ type: DropdownActionTypes[type], payload: { [key]: null } });
     setPersistedItems({ ...persistedItems, [key]: null });
   };
