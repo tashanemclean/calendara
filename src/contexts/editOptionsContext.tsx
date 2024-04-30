@@ -37,7 +37,7 @@ export const EditOptionsContext = createContext<{
 export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode | ReactNode[] }>) {
   const [state, dispatch] = useReducer(editOptionsReducer, initialState);
   const {
-    actions: { modify },
+    actions: { modify, modifyCity, modifyState },
     state: { activitiesIds, categoriesIds, storedCity, storedState },
   } = useDropdownContext();
   const activityItems = useMemo(
@@ -102,13 +102,19 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
     [dropdownActivitiesVM, modify],
   );
 
-  const onCityChange = useCallback((city: City) => {
-    modify(city, 'city', 'UPDATE_STORED_CITY_ITEMS');
-  }, []);
+  const onCityChange = useCallback(
+    (city: City) => {
+      modifyCity(city);
+    },
+    [modifyCity],
+  );
 
-  const onStateChange = useCallback((state: State) => {
-    modify(state, 'storedState', 'UPDATE_STORED_STATE_ITEMS');
-  }, []);
+  const onStateChange = useCallback(
+    (state: State) => {
+      modifyState(state);
+    },
+    [modifyState],
+  );
 
   const onCategoriesChange = useCallback(
     ({ selected }: Record<string, DropdownItem>) => {

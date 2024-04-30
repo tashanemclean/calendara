@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useUserInterface } from '../contexts/userInterfaceContext';
 import { City, State } from '../services/types';
@@ -26,6 +26,9 @@ const useDemo = () => {
     const value = e.target.value;
     if (!value) {
       setStateId(0);
+      // optimistically reset storage if state cleared
+      // localStorage.removeItem('storedCity');
+      // localStorage.removeItem('storedState');
     }
     return;
   };
@@ -33,8 +36,6 @@ const useDemo = () => {
   const handleStateChange = (selected: State) => {
     setStateId(selected.id);
     onStateChange(selected);
-    // optimistically reset previous city
-    // clear('city', 'UPDATE_STORED_CITY_ITEMS');
   };
 
   const handleCityChange = (selected: City) => {
@@ -60,6 +61,12 @@ const useDemo = () => {
     ],
     [state.dropdownItemsVM.storedCity, state.dropdownItemsVM.storedState],
   );
+
+  useEffect(() => {
+    if (state.dropdownItemsVM.storedState) {
+      setStateId(state.dropdownItemsVM.storedState.id);
+    }
+  }, [state.dropdownItemsVM.storedState]);
 
   return {
     cityId,

@@ -9,13 +9,17 @@ import { useLocalStorage } from '@lilib/hooks';
 import { City, State } from '../services/types';
 
 interface DropdownActions {
-  modify: (item: string[] | City | State, key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => void;
+  modify: (item: string[] | string, key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => void;
+  modifyCity: (item: City) => void;
+  modifyState: (item: State) => void;
   clear: (key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => void;
 }
 
 const initialContext: DropdownActions = {
   clear: () => {},
   modify: () => {},
+  modifyCity: () => {},
+  modifyState: () => {},
 };
 
 export const DropdownContext = createContext<{
@@ -35,9 +39,25 @@ export function StoredDropdownProvider({ children }: Readonly<{ children: ReactN
   }>('act-cat');
 
   const modify = useCallback(
-    (item: string[] | State | City, key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => {
+    (item: string[] | string, key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => {
       dispatch({ type: DropdownActionTypes[type], payload: { [key]: item } });
       setPersistedItems({ ...persistedItems, [key]: item });
+    },
+    [persistedItems, setPersistedItems],
+  );
+
+  const modifyCity = useCallback(
+    (item: City) => {
+      dispatch({ type: DropdownActionTypes.UPDATE_STORED_CITY_ITEMS, payload: { storedCity: item } });
+      setPersistedItems({ ...persistedItems, storedCity: item });
+    },
+    [persistedItems, setPersistedItems],
+  );
+
+  const modifyState = useCallback(
+    (item: State) => {
+      dispatch({ type: DropdownActionTypes.UPDATE_STORED_STATE_ITEMS, payload: { storedState: item } });
+      setPersistedItems({ ...persistedItems, storedState: item });
     },
     [persistedItems, setPersistedItems],
   );
@@ -53,9 +73,11 @@ export function StoredDropdownProvider({ children }: Readonly<{ children: ReactN
       actions: {
         clear,
         modify,
+        modifyCity,
+        modifyState,
       },
     }),
-    [state, clear, modify],
+    [state, clear, modify, modifyCity, modifyState],
   );
 
   useEffect(() => {

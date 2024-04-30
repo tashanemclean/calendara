@@ -49,13 +49,14 @@ export const Demo = () => {
               onChange={handleStateChange}
               onTextChange={onTextChange}
               placeHolder="State"
+              defaultValue={vm.storedState as State}
             />
             <CitySelect
               countryId={countryId}
               stateId={stateId}
               onChange={handleCityChange}
-              onTextChange={onTextChange}
               placeHolder="City"
+              defaultValue={vm.storedCity as City}
             />
             <ActivitiesCheckbox />
             <CategoriesCheckbox />
