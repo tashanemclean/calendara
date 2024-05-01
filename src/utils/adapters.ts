@@ -1,6 +1,14 @@
 import { EditOptionsState } from '../reducers/editOptions';
+import { City, State } from '../services/types';
 import { DropdownItem } from './type';
 
+type AdapterPayload = {
+  activitiesIds: string[] | null | undefined;
+  categoriesIds: string[] | null | undefined;
+  storedCity: City | null | undefined;
+  storedDays: number | null | undefined;
+  storedState: State | null | undefined;
+};
 export type ApiResponseRaw = {
   Activities: any[];
   Duration: string;
@@ -32,16 +40,21 @@ export const toStoredItemsVM = (storedIds: string[] | null, items: DropdownItem[
   return dropdownItems;
 };
 
-export const fromVMToPayload = ({ dropdownItemsVM }: EditOptionsState): ApiRequestPayload => {
-  const activity = dropdownItemsVM.activities.map((r) => r.id);
-  const categories = dropdownItemsVM.categories.map((r) => r.id);
-  console.log(dropdownItemsVM.storedDays, '** days');
+export const fromVMToPayload = ({
+  activitiesIds,
+  categoriesIds,
+  storedCity,
+  storedDays,
+  storedState,
+}: AdapterPayload): ApiRequestPayload => {
+  const activity = activitiesIds?.map((r) => r);
+  const categories = categoriesIds?.map((r) => r);
   return {
-    activity,
-    categories,
-    city: dropdownItemsVM.storedCity?.name,
-    state: dropdownItemsVM.storedState?.name,
-    days: dropdownItemsVM.storedDays ?? 5,
+    activity: activity ?? null,
+    categories: categories ?? null,
+    city: storedCity?.name,
+    state: storedState?.name,
+    days: storedDays ?? 5,
   };
 };
 

@@ -1,10 +1,14 @@
+import { useDropdownContext } from '../contexts/dropdownItemsContext';
 import { useEditOptionsContext } from '../contexts/editOptionsContext';
 import { fromVMToPayload } from '../utils/adapters';
 
 const useDemoRepo = () => {
   const { state } = useEditOptionsContext();
+  const {
+    state: { activitiesIds, categoriesIds, storedCity, storedDays, storedState },
+  } = useDropdownContext();
   const prepareData = () => {
-    return fromVMToPayload(state);
+    return fromVMToPayload({ activitiesIds, categoriesIds, storedCity, storedDays, storedState });
   };
   return {
     state,
