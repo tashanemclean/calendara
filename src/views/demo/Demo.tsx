@@ -34,7 +34,7 @@ export const Demo = () => {
   } = useDemo();
 
   const renderDraggable = () =>
-    draggableData.map((data, key) => (
+    draggableData?.map((data, key) => (
       <Draggable
         key={`${data + key}`}
         text={data}
@@ -78,9 +78,10 @@ export const Demo = () => {
                 <CategoriesCheckbox />
                 <DaysNumberField
                   label="Days"
+                  minValue={1}
                   maxValue={31}
                   onChange={handleDayChange}
-                  defaultValue={vm.storedDays ?? 0}
+                  defaultValue={vm.storedDays ?? 1}
                 />
                 {/* TODO: Refactor fields to use react hook form */}
                 {/* <FormManager

@@ -14,11 +14,7 @@ const useDemo = () => {
     actions: { onCityChange, onStateChange, modifyDays },
     state,
   } = useEditOptionsContext();
-  const { storageVM, loading, activities, onGetResponses } = useDemoUow();
-
-  const draggableData = ['Drag me ', 'Drag me 2'];
-
-  console.log(activities, '** activities');
+  const { storageVM, loading, vm, onGetResponses } = useDemoUow();
 
   const countryId = 233;
   const [stateId, setStateId] = useState(0);
@@ -63,7 +59,7 @@ const useDemo = () => {
   return {
     cityId,
     countryId,
-    draggableData,
+    draggableData: vm,
     editOptionsActive,
     stateId,
     storageVM,

@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useApiResponseContext } from '../contexts/apiContext';
 import useDemoRepo from './useDemoRepo';
+import useCustomToast from '../utils/useCustomToast';
 
 const useDemoUow = () => {
   const {
@@ -11,7 +12,7 @@ const useDemoUow = () => {
     state: { dropdownItemsVM },
     prepareData,
   } = useDemoRepo();
-
+  const { errorToast } = useCustomToast();
   const storageVM = useMemo(
     () => [
       {
@@ -25,6 +26,10 @@ const useDemoUow = () => {
 
   const onGetResponses = async () => {
     const payload = prepareData();
+    if (!payload) {
+      errorToast('State is required');
+      return;
+    }
     await getResponse(payload);
   };
 

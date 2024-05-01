@@ -1,3 +1,4 @@
+import { flatten } from 'flat';
 import { EditOptionsState } from '../reducers/editOptions';
 import { City, State } from '../services/types';
 import { DropdownItem } from './type';
@@ -54,14 +55,37 @@ export const fromVMToPayload = ({
     categories: categories ?? null,
     city: storedCity?.name,
     state: storedState?.name,
-    days: storedDays ?? 5,
+    days: storedDays ?? 1,
   };
 };
 
-export const fromResponsesToVM = (payload: ApiResponseRaw): ApiResponse => {
+export const fromResponsesToVM = (payload: ApiResponseRaw) => {
   return {
     activities: payload.Activities,
     duration: payload.Duration,
     location: payload.Location,
   };
+};
+
+// This function optimistically flattens the raw data result, removing the specified keys
+// THe given keys will be omitted from the UI
+export const toFlatDataObject = (data: ApiResponseRaw): Array<string> => {
+  let arr = [];
+  const raw_data = fromResponsesToVM(data);
+  const flatData = flatten({ raw_data }) as object;
+  for (const [key, value] of Object.entries(flatData)) {
+    if (
+      !key.includes('date') ??
+      !key.includes('duration') ??
+      !key.includes('day') ??
+      !key.includes('location') ??
+      !key.includes('name') ??
+      !key.includes('paid') ??
+      !key.includes('free') ??
+      !key.includes('cost')
+    ) {
+      arr.push(value);
+    }
+  }
+  return arr;
 };

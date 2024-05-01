@@ -8,6 +8,7 @@ const useDemoRepo = () => {
     state: { activitiesIds, categoriesIds, storedCity, storedDays, storedState },
   } = useDropdownContext();
   const prepareData = () => {
+    if (!storedState) return;
     return fromVMToPayload({ activitiesIds, categoriesIds, storedCity, storedDays, storedState });
   };
   return {

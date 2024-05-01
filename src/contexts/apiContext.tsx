@@ -3,7 +3,7 @@ import apiResponseReducer, { ApiActionTypes, ApiState, initialState } from '../r
 import { AxiosError } from 'axios';
 import useCustomToast from '../utils/useCustomToast';
 import * as service from '../services/options';
-import { ApiRequestPayload, fromResponsesToVM } from '../utils/adapters';
+import { ApiRequestPayload, toFlatDataObject } from '../utils/adapters';
 
 interface ApiContextActions {
   getResponse: (data: ApiRequestPayload) => Promise<void>;
@@ -27,7 +27,7 @@ export function ApiResponseProvider({ children }: Readonly<{ children: ReactNode
     try {
       const result = await service.getResponses(data);
       if (result) {
-        dispatch({ type: ApiActionTypes.GET_RESPONSE_SUCCESS, payload: fromResponsesToVM(result) });
+        dispatch({ type: ApiActionTypes.GET_RESPONSE_SUCCESS, payload: toFlatDataObject(result) });
         successToast('successfully found matching activities');
       }
     } catch (err: unknown) {
