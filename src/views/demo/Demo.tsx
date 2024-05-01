@@ -15,6 +15,7 @@ import { City, State } from '../../services/types';
 import { Spinner } from '../../components/Spinner';
 import { colors } from '../../constants/colors';
 import { Fade } from '../../components/Transitions/Fade';
+import { DaysNumberField } from '../../components/Forms/NumberField';
 
 export const Demo = () => {
   const {
@@ -29,6 +30,7 @@ export const Demo = () => {
     onTextChange,
     handleCityChange,
     handleStateChange,
+    handleDayChange,
   } = useDemo();
 
   const renderDraggable = () =>
@@ -74,6 +76,12 @@ export const Demo = () => {
                 />
                 <ActivitiesCheckbox />
                 <CategoriesCheckbox />
+                <DaysNumberField
+                  label="Days"
+                  maxValue={31}
+                  onChange={handleDayChange}
+                  defaultValue={vm.storedDays ?? 0}
+                />
                 {/* TODO: Refactor fields to use react hook form */}
                 {/* <FormManager
               onSubmit={handleFind}

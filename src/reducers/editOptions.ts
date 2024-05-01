@@ -6,6 +6,7 @@ interface DropdownVM {
   categories: DropdownItem[];
   storedState?: State | null;
   storedCity?: City | null;
+  storedDays?: number | null;
 }
 export enum EditOptionsActionTypes {
   UPDATE_ACTIVITY_INIT = 'UPDATE_ACTIVITY_INIT',
@@ -28,7 +29,7 @@ export interface EditOptionsState {
 export const initialState: EditOptionsState = {
   categories: null,
   activity: null,
-  dropdownItemsVM: { activities: [], categories: [], storedState: null, storedCity: null },
+  dropdownItemsVM: { activities: [], categories: [], storedState: null, storedDays: null, storedCity: null },
   loading: false,
   error: null,
 };

@@ -17,9 +17,10 @@ const useDemoUow = () => {
       {
         storedCity: dropdownItemsVM.storedCity,
         storedState: dropdownItemsVM.storedState,
+        storedDays: dropdownItemsVM.storedDays,
       },
     ],
-    [dropdownItemsVM.storedCity, dropdownItemsVM.storedState],
+    [dropdownItemsVM.storedCity, dropdownItemsVM.storedState, dropdownItemsVM.storedDays],
   );
 
   const onGetResponses = async () => {

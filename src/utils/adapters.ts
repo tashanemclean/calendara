@@ -16,8 +16,9 @@ export type ApiResponse = {
 export type ApiRequestPayload = {
   activity: string[] | null;
   categories: string[] | null;
-  city: number | undefined;
-  state: number | undefined;
+  city: string | undefined;
+  state: string | undefined;
+  days: number | undefined;
 };
 
 export const toStoredItemsVM = (storedIds: string[] | null, items: DropdownItem[]): DropdownItem[] => {
@@ -31,12 +32,16 @@ export const toStoredItemsVM = (storedIds: string[] | null, items: DropdownItem[
   return dropdownItems;
 };
 
-export const fromVMToPayload = ({ dropdownItemsVM, activity, categories }: EditOptionsState): ApiRequestPayload => {
+export const fromVMToPayload = ({ dropdownItemsVM }: EditOptionsState): ApiRequestPayload => {
+  const activity = dropdownItemsVM.activities.map((r) => r.id);
+  const categories = dropdownItemsVM.categories.map((r) => r.id);
+  console.log(dropdownItemsVM.storedDays, '** days');
   return {
     activity,
     categories,
-    city: dropdownItemsVM.storedCity?.id,
-    state: dropdownItemsVM.storedState?.id,
+    city: dropdownItemsVM.storedCity?.name,
+    state: dropdownItemsVM.storedState?.name,
+    days: dropdownItemsVM.storedDays ?? 5,
   };
 };
 

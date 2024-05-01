@@ -10,7 +10,7 @@ import { useLocalStorage } from '@lilib/hooks';
 import { City, State } from '../services/types';
 
 interface DropdownActions {
-  modify: (item: string[] | string, key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => void;
+  modify: (item: string[] | string | number, key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => void;
   modifyCity: (item: City) => void;
   modifyState: (item: State) => void;
   clear: (key: typeof STORAGE_KEYS, type: typeof UPDATE_STORED_ITEM_TYPE) => void;
@@ -37,10 +37,11 @@ export function StoredDropdownProvider({ children }: Readonly<{ children: ReactN
     categoriesIds?: string[] | null;
     storedState?: State | null;
     storedCity?: City | null;
+    storedDays?: number | null;
   }>('act-cat');
 
   const modify = useCallback(
-    (item: string[] | string, key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => {
+    (item: string[] | string | number, key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => {
       dispatch({ type: DropdownActionTypes[type], payload: { [key]: item } });
       setPersistedItems({ ...persistedItems, [key]: item });
     },

@@ -5,13 +5,15 @@ export const UPDATE_STORED_ITEM_TYPE:
   | 'UPDATE_STORED_A_ITEMS'
   | 'UPDATE_STORED_B_ITEMS'
   | 'UPDATE_STORED_CITY_ITEMS'
-  | 'UPDATE_STORED_STATE_ITEMS' = 'UPDATE_STORED_A_ITEMS';
+  | 'UPDATE_STORED_STATE_ITEMS'
+  | 'UPDATE_STORED_DAY_ITEMS' = 'UPDATE_STORED_A_ITEMS';
 'UPDATE_STORED_A_ITEMS' as const;
 export enum DropdownActionTypes {
   GET_STORED_DROPDOWNS_SUCCESS = 'GET_STORED_DRODOWNS_SUCCESS',
   UPDATE_STORED_A_ITEMS = 'UPDATE_STORED_A_ITEMS',
   UPDATE_STORED_B_ITEMS = 'UPDATE_STORED_B_ITEMS',
   UPDATE_STORED_CITY_ITEMS = 'UPDATE_STORED_CITY_ITEMS',
+  UPDATE_STORED_DAY_ITEMS = 'UPDATE_STORED_DAY_ITEMS',
   UPDATE_STORED_STATE_ITEMS = 'UPDATE_STORED_STATE_ITEMS',
 }
 
@@ -33,6 +35,11 @@ interface UpdateStoredCityStorageSuccess {
   type: DropdownActionTypes.UPDATE_STORED_CITY_ITEMS;
   payload: DropdownState;
 }
+
+interface UpdateDaysStorageSuccess {
+  type: DropdownActionTypes.UPDATE_STORED_DAY_ITEMS;
+  payload: DropdownState;
+}
 interface UpdateStateStorageSuccess {
   type: DropdownActionTypes.UPDATE_STORED_STATE_ITEMS;
   payload: DropdownState;
@@ -43,13 +50,15 @@ type DropdownAction =
   | UpdateStoredActivityStorageSuccess
   | UpdateCategoriesStorageSuccess
   | UpdateStoredCityStorageSuccess
-  | UpdateStateStorageSuccess;
+  | UpdateStateStorageSuccess
+  | UpdateDaysStorageSuccess;
 
 export interface DropdownState {
   activitiesIds?: string[] | null;
   categoriesIds?: string[] | null;
   storedCity?: City | null;
   storedState?: State | null;
+  storedDays?: number | null;
   error?: string | null;
   loading?: boolean;
 }
@@ -59,6 +68,7 @@ export const initialState: DropdownState = {
   categoriesIds: null,
   storedCity: null,
   storedState: null,
+  storedDays: null,
   error: null,
   loading: false,
 };
@@ -93,6 +103,13 @@ const dropdownReducer = (state = initialState, { type, payload }: DropdownAction
       return {
         ...state,
         storedCity: payload.storedCity,
+        loading: false,
+      };
+    }
+    case DropdownActionTypes.UPDATE_STORED_DAY_ITEMS: {
+      return {
+        ...state,
+        storedDays: payload.storedDays,
         loading: false,
       };
     }

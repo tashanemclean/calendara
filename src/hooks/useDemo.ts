@@ -11,7 +11,7 @@ const useDemo = () => {
     state: { editOptionsActive },
   } = useUserInterface();
   const {
-    actions: { onCityChange, onStateChange },
+    actions: { onCityChange, onStateChange, modifyDays },
     state,
   } = useEditOptionsContext();
   const { storageVM, loading, activities, onGetResponses } = useDemoUow();
@@ -39,6 +39,10 @@ const useDemo = () => {
   const handleCityChange = (selected: City) => {
     setCityId(selected.id);
     onCityChange(selected);
+  };
+
+  const handleDayChange = (value: number) => {
+    modifyDays(value);
   };
 
   const onCloseOptions = useCallback(() => {
@@ -69,6 +73,7 @@ const useDemo = () => {
     setCityId,
     handleCityChange,
     handleStateChange,
+    handleDayChange,
   };
 };
 

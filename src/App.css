@@ -248,3 +248,11 @@
 .dropped-item:hover svg {
   display: inline;
 }
+
+.number-field-input:focus {
+  outline: none;
+}
+
+.react-aria-NumberField .react-aria-Label {
+  padding: 12px 20px;
+}

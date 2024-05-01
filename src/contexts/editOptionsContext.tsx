@@ -9,6 +9,7 @@ import { City, State } from '../services/types';
 interface EditOptionsContextActions {
   modifyActivity: (activity: string[]) => void;
   modifyCategories: (categories: string[]) => void;
+  modifyDays: (days: number) => void;
   onActivityChange: (activity: Record<string, DropdownItem>) => void;
   onCategoriesChange: (categories: Record<string, DropdownItem>) => void;
   onCityChange: (city: City) => void;
@@ -19,6 +20,7 @@ interface EditOptionsContextActions {
 const initialContext: EditOptionsContextActions = {
   modifyActivity: () => null,
   modifyCategories: () => null,
+  modifyDays: () => null,
   onActivityChange: () => {},
   onCategoriesChange: () => {},
   onCityChange: () => {},
@@ -38,12 +40,12 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
   const [state, dispatch] = useReducer(editOptionsReducer, initialState);
   const {
     actions: { modify, modifyCity, modifyState },
-    state: { activitiesIds, categoriesIds, storedCity, storedState },
+    state: { activitiesIds, categoriesIds, storedCity, storedDays, storedState },
   } = useDropdownContext();
   const activityItems = useMemo(
     () => [
-      { id: '1', name: 'free', active: false },
-      { id: '0', name: 'paid', active: false },
+      { id: '0', name: 'free', active: false },
+      { id: '1', name: 'paid', active: false },
     ],
     [],
   );
@@ -77,6 +79,13 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
   const modifyCategories = (categories: string[]) => {
     dispatch({ type: EditOptionsActionTypes.UPDATE_CATEGORIES_SUCCESS, payload: categories });
   };
+
+  const modifyDays = useCallback(
+    (days: number) => {
+      modify(days, 'storedDays', 'UPDATE_STORED_DAY_ITEMS');
+    },
+    [modify],
+  );
   const onActivityChange = useCallback(
     ({ selected }: Record<string, DropdownItem>) => {
       dispatch({ type: EditOptionsActionTypes.UPDATE_ACTIVITY_INIT });
@@ -157,9 +166,10 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
         onCategoriesChange,
         onCityChange,
         onStateChange,
+        modifyDays,
       },
     }),
-    [state, modifyCategories, onActivityChange, onCategoriesChange, onCityChange, onStateChange],
+    [state, modifyCategories, onActivityChange, onCategoriesChange, onCityChange, onStateChange, modifyDays],
   );
 
   useEffect(() => {
@@ -170,9 +180,10 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
         categories: dropdownCategoriesVM,
         storedState,
         storedCity,
+        storedDays,
       },
     });
-  }, [dropdownActivitiesVM, dropdownCategoriesVM, storedCity, storedState]);
+  }, [dropdownActivitiesVM, dropdownCategoriesVM, storedCity, storedState, storedDays]);
 
   return <EditOptionsContext.Provider value={value}>{children}</EditOptionsContext.Provider>;
 }
