@@ -14,9 +14,11 @@ const useDemo = () => {
     actions: { onCityChange, onStateChange },
     state,
   } = useEditOptionsContext();
-  const { storageVM, loading, onGetResponses } = useDemoUow();
+  const { storageVM, loading, activities, onGetResponses } = useDemoUow();
 
   const draggableData = ['Drag me ', 'Drag me 2'];
+
+  console.log(activities, '** activities');
 
   const countryId = 233;
   const [stateId, setStateId] = useState(0);

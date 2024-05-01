@@ -5,18 +5,21 @@ import useDemoRepo from './useDemoRepo';
 const useDemoUow = () => {
   const {
     actions: { getResponse },
-    state: { loading },
+    state,
   } = useApiResponseContext();
-  const { state, prepareData } = useDemoRepo();
+  const {
+    state: { dropdownItemsVM },
+    prepareData,
+  } = useDemoRepo();
 
   const storageVM = useMemo(
     () => [
       {
-        storedCity: state.dropdownItemsVM.storedCity,
-        storedState: state.dropdownItemsVM.storedState,
+        storedCity: dropdownItemsVM.storedCity,
+        storedState: dropdownItemsVM.storedState,
       },
     ],
-    [state.dropdownItemsVM.storedCity, state.dropdownItemsVM.storedState],
+    [dropdownItemsVM.storedCity, dropdownItemsVM.storedState],
   );
 
   const onGetResponses = async () => {
@@ -25,7 +28,7 @@ const useDemoUow = () => {
   };
 
   return {
-    loading,
+    ...state,
     storageVM,
     onGetResponses,
   };

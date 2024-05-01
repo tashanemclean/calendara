@@ -1,6 +1,18 @@
 import { EditOptionsState } from '../reducers/editOptions';
 import { DropdownItem } from './type';
 
+export type ApiResponseRaw = {
+  Activities: any[];
+  Duration: string;
+  Location: string;
+};
+
+export type ApiResponse = {
+  activities: any[];
+  duration: string;
+  location: string;
+};
+
 export type ApiRequestPayload = {
   activity: string[] | null;
   categories: string[] | null;
@@ -25,5 +37,13 @@ export const fromVMToPayload = ({ dropdownItemsVM, activity, categories }: EditO
     categories,
     city: dropdownItemsVM.storedCity?.id,
     state: dropdownItemsVM.storedState?.id,
+  };
+};
+
+export const fromResponsesToVM = (payload: ApiResponseRaw): ApiResponse => {
+  return {
+    activities: payload.Activities,
+    duration: payload.Duration,
+    location: payload.Location,
   };
 };

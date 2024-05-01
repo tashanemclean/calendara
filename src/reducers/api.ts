@@ -1,6 +1,4 @@
-export type ApiResponse = {
-  activities: string[];
-};
+import { ApiResponse } from '../utils/adapters';
 
 export enum ApiActionTypes {
   GET_RESPONSE_INIT = 'GET_RESPONSE_INIT',
@@ -26,13 +24,17 @@ interface GetResponseFail {
 type ApiAction = GetResponseInit | GetResponseSuccess | GetResponseFail;
 
 export interface ApiState {
-  responses: any[] | null;
+  activities: any[] | null;
+  duration: string | null;
+  location: string | null;
   error?: string | null;
   loading?: boolean;
 }
 
 export const initialState: ApiState = {
-  responses: null,
+  activities: null,
+  duration: null,
+  location: null,
   error: null,
   loading: false,
 };
@@ -43,14 +45,15 @@ const apiResponseReducer = (state = initialState, { type, payload }: ApiAction):
       return {
         ...state,
         error: null,
-        responses: null,
         loading: true,
       };
     }
     case ApiActionTypes.GET_RESPONSE_SUCCESS: {
       return {
         ...state,
-        responses: payload.activities,
+        activities: payload.activities,
+        duration: payload.duration,
+        location: payload.location,
         loading: false,
       };
     }
