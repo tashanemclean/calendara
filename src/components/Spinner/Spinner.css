@@ -1,0 +1,85 @@
+.fade-in-enter {
+  opacity: 0;
+}
+
+.fade-in-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+
+.fade-in-exit {
+  opacity: 1;
+}
+
+.fade-in-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 12%;
+}
+
+.spinner-container svg {
+  animation: spin 3.6s linear infinite;
+  width: 24px;
+  height: 100%;
+}
+
+@media (max-width: 1280px) {
+  .spinner-container {
+    position: absolute;
+    top: 40%;
+    left: 45%;
+  }
+
+  .spinner-container svg {
+    width: 50px !important;
+    height: 100%;
+  }
+}
+
+.spinner-container-sm svg {
+  width: 16px;
+}
+
+.spinner-container-xs svg {
+  width: 12px;
+}
+
+.spinner-container-md svg {
+  width: 30px;
+}
+
+.spinner-container-lg svg {
+  width: 40px;
+}
+
+.spinner-container circle {
+  animation: outline 2s cubic-bezier(0.77, 0, 0.18, 1) infinite;
+}
+
+@keyframes outline {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dashoffset: 300;
+  }
+  100% {
+    stroke-dashoffset: 600;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(-1turn);
+  }
+}

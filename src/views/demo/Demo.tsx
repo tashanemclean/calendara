@@ -12,6 +12,9 @@ import useDemo from '../../hooks/useDemo';
 import { CategoriesCheckbox } from '../../components/Categories';
 import { Button } from '../../components/Buttons';
 import { City, State } from '../../services/types';
+import { Spinner } from '../../components/Spinner';
+import { colors } from '../../constants/colors';
+import { Fade } from '../../components/Transitions/Fade';
 
 export const Demo = () => {
   const {
@@ -21,6 +24,7 @@ export const Demo = () => {
     editOptionsActive,
     stateId,
     storageVM: [vm],
+    loading,
     onSubmit,
     onTextChange,
     handleCityChange,
@@ -43,25 +47,35 @@ export const Demo = () => {
           panelHeight="100%"
           panelWidth="25%"
         >
-          <EditOptions>
-            <StateSelect
-              countryId={countryId}
-              onChange={handleStateChange}
-              onTextChange={onTextChange}
-              placeHolder="State"
-              defaultValue={vm.storedState as State}
-            />
-            <CitySelect
-              countryId={countryId}
-              stateId={stateId}
-              onChange={handleCityChange}
-              placeHolder="City"
-              defaultValue={vm.storedCity as City}
-            />
-            <ActivitiesCheckbox />
-            <CategoriesCheckbox />
-            {/* TODO: Refactor fields to use react hook form */}
-            {/* <FormManager
+          {loading && (
+            <Fade enter={true}>
+              <Spinner
+                size="lg"
+                color={colors.Mustard[500]}
+              />
+            </Fade>
+          )}
+          {!loading && (
+            <>
+              <EditOptions>
+                <StateSelect
+                  countryId={countryId}
+                  onChange={handleStateChange}
+                  onTextChange={onTextChange}
+                  placeHolder="State"
+                  defaultValue={vm.storedState as State}
+                />
+                <CitySelect
+                  countryId={countryId}
+                  stateId={stateId}
+                  onChange={handleCityChange}
+                  placeHolder="City"
+                  defaultValue={vm.storedCity as City}
+                />
+                <ActivitiesCheckbox />
+                <CategoriesCheckbox />
+                {/* TODO: Refactor fields to use react hook form */}
+                {/* <FormManager
               onSubmit={handleFind}
               render={({ control, onSubmit }) => (
                 <>
@@ -87,16 +101,18 @@ export const Demo = () => {
                 </>
               )}
             /> */}
-            <Button
-              onClick={onSubmit}
-              type="submit"
-              disabled={false}
-              style={{ marginTop: 'auto', marginLeft: '20%' }}
-            >
-              Submit
-            </Button>
-          </EditOptions>
-          {!editOptionsActive && <DraggableContainer>{renderDraggable()}</DraggableContainer>}
+                <Button
+                  onClick={onSubmit}
+                  type="submit"
+                  disabled={false}
+                  style={{ marginTop: 'auto', marginLeft: '20%' }}
+                >
+                  Submit
+                </Button>
+              </EditOptions>
+              {!editOptionsActive && <DraggableContainer>{renderDraggable()}</DraggableContainer>}
+            </>
+          )}
         </Panel>
         <Panel
           panelHeight="100%"

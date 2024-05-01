@@ -5,6 +5,7 @@ import useDemoRepo from './useDemoRepo';
 const useDemoUow = () => {
   const {
     actions: { getResponse },
+    state: { loading },
   } = useApiResponseContext();
   const { state, prepareData } = useDemoRepo();
 
@@ -24,6 +25,7 @@ const useDemoUow = () => {
   };
 
   return {
+    loading,
     storageVM,
     onGetResponses,
   };

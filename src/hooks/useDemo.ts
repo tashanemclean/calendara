@@ -14,7 +14,7 @@ const useDemo = () => {
     actions: { onCityChange, onStateChange },
     state,
   } = useEditOptionsContext();
-  const { storageVM, onGetResponses } = useDemoUow();
+  const { storageVM, loading, onGetResponses } = useDemoUow();
 
   const draggableData = ['Drag me ', 'Drag me 2'];
 
@@ -61,6 +61,7 @@ const useDemo = () => {
     editOptionsActive,
     stateId,
     storageVM,
+    loading,
     onSubmit,
     onTextChange,
     setCityId,

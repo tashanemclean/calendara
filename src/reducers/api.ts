@@ -44,7 +44,7 @@ const apiResponseReducer = (state = initialState, { type, payload }: ApiAction):
         ...state,
         error: null,
         responses: null,
-        loading: false,
+        loading: true,
       };
     }
     case ApiActionTypes.GET_RESPONSE_SUCCESS: {

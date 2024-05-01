@@ -1,3 +1,4 @@
+export { BackArrowIcon } from './BackArrowIcon';
 export { EditIcon } from './EditIcon';
 export { ExpandMoreIcon } from './ExpandMoreIcon';
 export { NextArrowIcon } from './NextArrowIcon';

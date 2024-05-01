@@ -1,5 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import './components/Spinner/Spinner.css';
 import './components/Ripple/Ripple.css';
 import './components/TextInput/TextInput.css';
 import './components/Buttons/TextButton.css';

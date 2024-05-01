@@ -2,7 +2,7 @@ import { MouseEvent, ReactNode, useCallback } from 'react';
 
 import { useUserInterface } from '../../contexts/userInterfaceContext';
 import { IconContainer } from '../../utils/common/style';
-import { EditIcon } from '../Icons';
+import { BackArrowIcon, EditIcon } from '../Icons';
 
 export const EditOptions = ({ children }: { children: ReactNode }) => {
   const {
@@ -35,7 +35,17 @@ export const EditOptions = ({ children }: { children: ReactNode }) => {
           <EditIcon />
         </IconContainer>
       )}
-      {editOptionsActive && children}
+      {editOptionsActive && (
+        <>
+          <IconContainer
+            onClick={onToggle}
+            style={{ cursor: 'pointer', marginRight: 'auto' }}
+          >
+            <BackArrowIcon />
+          </IconContainer>
+          {children}
+        </>
+      )}
     </>
   );
 };
