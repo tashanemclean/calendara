@@ -1,10 +1,10 @@
 import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useReducer } from 'react';
-import editOptionsReducer, { EditOptionsActionTypes, EditOptionsState, initialState } from '../reducers/editOptions';
 
-import { toStoredItemsVM } from '../utils/adapters';
-import { useDropdownContext } from './dropdownItemsContext';
-import { DropdownItem } from '../utils/type';
+import editOptionsReducer, { EditOptionsActionTypes, EditOptionsState, initialState } from '../reducers/editOptions';
 import { City, State } from '../services/types';
+import { toStoredItemsVM } from '../utils/adapters';
+import { DropdownItem } from '../utils/type';
+import { useDropdownContext } from './dropdownItemsContext';
 
 interface EditOptionsContextActions {
   modifyActivity: (activity: string[]) => void;
@@ -72,13 +72,13 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
     [categoriesItems, categoriesIds],
   );
 
-  const modifyActivity = (activity: string[]) => {
+  const modifyActivity = useCallback((activity: string[]) => {
     dispatch({ type: EditOptionsActionTypes.UPDATE_ACTIVITY_SUCCESS, payload: activity });
-  };
+  }, []);
 
-  const modifyCategories = (categories: string[]) => {
+  const modifyCategories = useCallback((categories: string[]) => {
     dispatch({ type: EditOptionsActionTypes.UPDATE_CATEGORIES_SUCCESS, payload: categories });
-  };
+  }, []);
 
   const modifyDays = useCallback(
     (days: number) => {
@@ -108,7 +108,7 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
         modifyActivity(ids);
       }
     },
-    [dropdownActivitiesVM, modify],
+    [dropdownActivitiesVM, modify, modifyActivity],
   );
 
   const onCityChange = useCallback(
@@ -147,7 +147,7 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
         modifyCategories(ids);
       }
     },
-    [dropdownCategoriesVM, modify],
+    [dropdownCategoriesVM, modify, modifyCategories],
   );
 
   const toActiveIds = (items: DropdownItem[]) => {
@@ -169,7 +169,16 @@ export function EditOptionsProvider({ children }: Readonly<{ children: ReactNode
         modifyDays,
       },
     }),
-    [state, modifyCategories, onActivityChange, onCategoriesChange, onCityChange, onStateChange, modifyDays],
+    [
+      state,
+      modifyActivity,
+      modifyCategories,
+      onActivityChange,
+      onCategoriesChange,
+      onCityChange,
+      onStateChange,
+      modifyDays,
+    ],
   );
 
   useEffect(() => {

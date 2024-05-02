@@ -1,21 +1,20 @@
 import styled from 'styled-components';
 
 import { ActivitiesCheckbox } from '../../components/Activities';
+import { Button } from '../../components/Buttons';
 import { Calendar } from '../../components/Calendar';
+import { CategoriesCheckbox } from '../../components/Categories';
 import { Draggable } from '../../components/Draggable';
 import { CitySelect, StateSelect } from '../../components/Dropdown';
 import { EditOptions } from '../../components/EditOptions';
+import { DaysNumberField } from '../../components/Forms/NumberField';
 import { Header } from '../../components/Header';
 import { Panel } from '../../components/Panel';
+import { Spinner } from '../../components/Spinner';
+import { Fade } from '../../components/Transitions/Fade';
+import { colors } from '../../constants/colors';
 import { screen } from '../../constants/screen';
 import useDemo from '../../hooks/useDemo';
-import { CategoriesCheckbox } from '../../components/Categories';
-import { Button } from '../../components/Buttons';
-import { City, State } from '../../services/types';
-import { Spinner } from '../../components/Spinner';
-import { colors } from '../../constants/colors';
-import { Fade } from '../../components/Transitions/Fade';
-import { DaysNumberField } from '../../components/Forms/NumberField';
 
 export const Demo = () => {
   const {
@@ -64,14 +63,14 @@ export const Demo = () => {
                   onChange={handleStateChange}
                   onTextChange={onTextChange}
                   placeHolder="State"
-                  defaultValue={vm.storedState as State}
+                  defaultValue={vm.storedState!}
                 />
                 <CitySelect
                   countryId={countryId}
                   stateId={stateId}
                   onChange={handleCityChange}
                   placeHolder="City"
-                  defaultValue={vm.storedCity as City}
+                  defaultValue={vm.storedCity!}
                 />
                 <ActivitiesCheckbox />
                 <CategoriesCheckbox />

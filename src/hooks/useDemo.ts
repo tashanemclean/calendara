@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
+import { useEditOptionsContext } from '../contexts/editOptionsContext';
 import { useUserInterface } from '../contexts/userInterfaceContext';
 import { City, State } from '../services/types';
-import { useEditOptionsContext } from '../contexts/editOptionsContext';
 import useDemoUow from './useDemoUow';
 
 const useDemo = () => {

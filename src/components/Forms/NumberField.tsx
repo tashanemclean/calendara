@@ -1,6 +1,7 @@
 import type { NumberFieldProps, ValidationResult } from 'react-aria-components';
 import { Button, FieldError, Group, Input, Label, NumberField, Text } from 'react-aria-components';
 import styled from 'styled-components';
+
 import { colors } from '../../constants/colors';
 import { IconContainer } from '../../utils/common/style';
 

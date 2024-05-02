@@ -1,4 +1,6 @@
+import { useLocalStorage } from '@lilib/hooks';
 import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useReducer } from 'react';
+
 import dropdownReducer, {
   DropdownActionTypes,
   DropdownState,
@@ -6,7 +8,6 @@ import dropdownReducer, {
   STORAGE_KEYS,
   UPDATE_STORED_ITEM_TYPE,
 } from '../reducers/dropdown';
-import { useLocalStorage } from '@lilib/hooks';
 import { City, State } from '../services/types';
 
 interface DropdownActions {
@@ -64,10 +65,13 @@ export function StoredDropdownProvider({ children }: Readonly<{ children: ReactN
     [persistedItems, setPersistedItems],
   );
 
-  const clear = (key: typeof STORAGE_KEYS, type: typeof UPDATE_STORED_ITEM_TYPE) => {
-    dispatch({ type: DropdownActionTypes[type], payload: { [key]: null } });
-    setPersistedItems({ ...persistedItems, [key]: null });
-  };
+  const clear = useCallback(
+    (key: typeof STORAGE_KEYS, type: typeof UPDATE_STORED_ITEM_TYPE) => {
+      dispatch({ type: DropdownActionTypes[type], payload: { [key]: null } });
+      setPersistedItems({ ...persistedItems, [key]: null });
+    },
+    [persistedItems, setPersistedItems],
+  );
 
   const value = useMemo(
     () => ({

@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
-import { DropdownItem } from '../../utils/type';
+
 import { useEditOptionsContext } from '../../contexts/editOptionsContext';
+import { DropdownItem } from '../../utils/type';
 
 const useCategories = () => {
   const {

@@ -1,8 +1,7 @@
-import { forwardRef, InputHTMLAttributes, MouseEvent, useState } from 'react';
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
-import { colors } from '../../constants/colors';
-import { TextMD, TextSM } from '../../typography';
+import { TextMD } from '../../typography';
 import { DropdownItem } from '../../utils/type';
 
 interface Props {
@@ -75,8 +74,4 @@ const LabelContainer = styled.div`
   flex-direction: column;
   position: relative;
   top: 3px;
-`;
-
-const Caption = styled(TextSM.Medium)`
-  color: ${colors.Black[600]};
 `;

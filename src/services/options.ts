@@ -1,4 +1,4 @@
-import { ApiRequestPayload, ApiResponseRaw, flatten } from '../utils/adapters';
+import { ApiRequestPayload, ApiResponseRaw } from '../utils/adapters';
 import api from './api';
 
 export const getResponses = async (payload: ApiRequestPayload): Promise<ApiResponseRaw> => {

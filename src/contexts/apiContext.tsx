@@ -1,9 +1,10 @@
-import { createContext, ReactNode, useCallback, useContext, useMemo, useReducer } from 'react';
-import apiResponseReducer, { ApiActionTypes, ApiState, initialState } from '../reducers/api';
 import { AxiosError } from 'axios';
-import useCustomToast from '../utils/useCustomToast';
+import { createContext, ReactNode, useCallback, useContext, useMemo, useReducer } from 'react';
+
+import apiResponseReducer, { ApiActionTypes, ApiState, initialState } from '../reducers/api';
 import * as service from '../services/options';
 import { ApiRequestPayload, toFlatDataObject } from '../utils/adapters';
+import useCustomToast from '../utils/useCustomToast';
 
 interface ApiContextActions {
   getResponse: (data: ApiRequestPayload) => Promise<void>;
@@ -22,20 +23,23 @@ export function ApiResponseProvider({ children }: Readonly<{ children: ReactNode
   const [state, dispatch] = useReducer(apiResponseReducer, initialState);
   const { errorToast, successToast } = useCustomToast();
 
-  const getResponse = useCallback(async (data: ApiRequestPayload) => {
-    dispatch({ type: ApiActionTypes.GET_RESPONSE_INIT });
-    try {
-      const result = await service.getResponses(data);
-      if (result) {
-        dispatch({ type: ApiActionTypes.GET_RESPONSE_SUCCESS, payload: toFlatDataObject(result) });
-        successToast('successfully found matching activities');
+  const getResponse = useCallback(
+    async (data: ApiRequestPayload) => {
+      dispatch({ type: ApiActionTypes.GET_RESPONSE_INIT });
+      try {
+        const result = await service.getResponses(data);
+        if (result) {
+          dispatch({ type: ApiActionTypes.GET_RESPONSE_SUCCESS, payload: toFlatDataObject(result) });
+          successToast('successfully found matching activities');
+        }
+      } catch (err: unknown) {
+        const axiosErr = err as AxiosError;
+        dispatch({ type: ApiActionTypes.GET_RESPONSE_FAIL, payload: axiosErr.message });
+        errorToast('error with request');
       }
-    } catch (err: unknown) {
-      const axiosErr = err as AxiosError;
-      dispatch({ type: ApiActionTypes.GET_RESPONSE_FAIL, payload: axiosErr.message });
-      errorToast('error with request');
-    }
-  }, []);
+    },
+    [errorToast, successToast],
+  );
 
   const value = useMemo(
     () => ({

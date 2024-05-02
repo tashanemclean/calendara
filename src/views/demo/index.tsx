@@ -1,11 +1,11 @@
 import { ToastContainer } from 'react-toastify';
 
+import { ApiResponseProvider } from '../../contexts/apiContext';
 import { AuthProvider } from '../../contexts/authContext';
+import { StoredDropdownProvider } from '../../contexts/dropdownItemsContext';
+import { EditOptionsProvider } from '../../contexts/editOptionsContext';
 import { UserInterfaceProvider } from '../../contexts/userInterfaceContext';
 import { Demo } from './Demo';
-import { EditOptionsProvider } from '../../contexts/editOptionsContext';
-import { StoredDropdownProvider } from '../../contexts/dropdownItemsContext';
-import { ApiResponseProvider } from '../../contexts/apiContext';
 
 const Index = () => {
   return (

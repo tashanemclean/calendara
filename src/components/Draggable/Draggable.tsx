@@ -1,8 +1,8 @@
 import { useDrag } from 'react-aria';
 import styled from 'styled-components';
 
-import { TextSM } from '../../typography';
 import { colors } from '../../constants/colors';
+import { TextSM } from '../../typography';
 
 export const Draggable = ({ text }: { text: string }) => {
   const { dragProps, isDragging } = useDrag({

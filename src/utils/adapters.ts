@@ -1,33 +1,37 @@
 import { flatten } from 'flat';
+
 import { City, State } from '../services/types';
 import { DropdownItem } from './type';
 
-type AdapterPayload = {
+interface AdapterPayload {
   activitiesIds: string[] | null | undefined;
   categoriesIds: string[] | null | undefined;
   storedCity: City | null | undefined;
   storedDays: number | null | undefined;
   storedState: State | null | undefined;
-};
-export type ApiResponseRaw = {
+}
+
+export interface ApiResponseRaw {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Activities: any[];
   Duration: string;
   Location: string;
-};
+}
 
-export type ApiResponse = {
+export interface ApiResponse {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   activities: any[];
   duration: string;
   location: string;
-};
+}
 
-export type ApiRequestPayload = {
+export interface ApiRequestPayload {
   activity: string[] | null;
   categories: string[] | null;
   city: string | undefined;
   state: string | undefined;
   days: number | undefined;
-};
+}
 
 export const toStoredItemsVM = (storedIds: string[] | null, items: DropdownItem[]): DropdownItem[] => {
   const dropdownItems = items.map((r) => {
@@ -68,10 +72,10 @@ export const fromResponsesToVM = (payload: ApiResponseRaw) => {
 
 // This function optimistically flattens the raw data result, removing the specified keys
 // THe given keys will be omitted from the UI
-export const toFlatDataObject = (data: ApiResponseRaw): Array<string> => {
-  let arr = [];
+export const toFlatDataObject = (data: ApiResponseRaw): string[] => {
+  const arr = [];
   const raw_data = fromResponsesToVM(data);
-  const flatData = flatten({ raw_data }) as object;
+  const flatData = flatten({ raw_data });
   for (const [key, value] of Object.entries(flatData)) {
     if (
       !key.includes('date') ??
