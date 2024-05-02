@@ -19,7 +19,6 @@ import { DaysNumberField } from '../../components/Forms/NumberField';
 
 export const Demo = () => {
   const {
-    cityId,
     countryId,
     draggableData,
     editOptionsActive,

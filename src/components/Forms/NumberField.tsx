@@ -24,7 +24,7 @@ export const DaysNumberField = ({ label, description, errorMessage, ...props }: 
           </Button>
           <Input
             className="number-field-input"
-            style={{ backgroundColor: colors.Mustard[500], border: 'none' }}
+            style={{ backgroundColor: colors.Mustard[500], border: 'none', color: colors.Space[500] }}
           />
           <Button
             style={{ color: colors.Mustard[500], fontSize: '24px' }}

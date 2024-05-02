@@ -1,5 +1,4 @@
 import { flatten } from 'flat';
-import { EditOptionsState } from '../reducers/editOptions';
 import { City, State } from '../services/types';
 import { DropdownItem } from './type';
 
@@ -79,7 +78,7 @@ export const toFlatDataObject = (data: ApiResponseRaw): Array<string> => {
       !key.includes('duration') ??
       !key.includes('day') ??
       !key.includes('location') ??
-      !key.includes('name') ??
+      !key.includes('description') ??
       !key.includes('paid') ??
       !key.includes('free') ??
       !key.includes('cost')

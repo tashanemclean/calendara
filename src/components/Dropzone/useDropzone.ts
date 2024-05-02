@@ -38,7 +38,7 @@ const useDropzone = () => {
   };
 
   const truncate = (text: string) => {
-    return text.length > 20 ? `${text.substring(0, 20)}...` : text;
+    return text.length > 100 ? `${text.substring(0, 100)}...` : text;
   };
 
   const isMaximumDropped = useCallback(() => {
