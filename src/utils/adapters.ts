@@ -75,7 +75,7 @@ export const fromResponsesToVM = (payload: ApiResponseRaw) => {
 export const toFlatDataObject = (data: ApiResponseRaw): string[] => {
   const arr = [];
   const raw_data = fromResponsesToVM(data);
-  const flatData = flatten({ raw_data });
+  const flatData = flatten({ raw_data }) as object;
   for (const [key, value] of Object.entries(flatData)) {
     if (
       !key.includes('date') ??
