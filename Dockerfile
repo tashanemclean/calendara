@@ -12,7 +12,7 @@ RUN npm install
 COPY . .
 # # Set some variable... must replace with real values
 ARG VITE_API_BASE_URL
-ENV VITE_API_BASE_URL="go-app-lb-1161297066.us-east-1.elb.amazonaws.com:9000"
+ENV VITE_API_BASE_URL="http://go-app-lb-1161297066.us-east-1.elb.amazonaws.com:9000/"
 RUN echo "VITE_API_BASE_URL=${VITE_API_BASE_URL}" >> .env
 
 # Build the application
