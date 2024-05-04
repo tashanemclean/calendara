@@ -14,12 +14,6 @@ export default ({ mode }: { mode: string }) => {
     base: '',
     server: {
       port: +(env.VITE_APP_PORT ?? 3000),
-      proxy: {
-        '/v1': {
-          target: env.VITE_API_BASE_URL,
-          changeOrigin: true,
-        },
-      },
     },
   });
 };
