@@ -78,13 +78,13 @@ export const toFlatDataObject = (data: ApiResponseRaw): string[] => {
   const flatData = flatten({ raw_data }) as object;
   for (const [key, value] of Object.entries(flatData)) {
     if (
-      !key.includes('date') ??
-      !key.includes('duration') ??
-      !key.includes('day') ??
-      !key.includes('location') ??
-      !key.includes('description') ??
-      !key.includes('paid') ??
-      !key.includes('free') ??
+      !key.includes('date') ||
+      !key.includes('duration') ||
+      !key.includes('day') ||
+      !key.includes('location') ||
+      !key.includes('description') ||
+      !key.includes('paid') ||
+      !key.includes('free') ||
       !key.includes('cost')
     ) {
       arr.push(value);
