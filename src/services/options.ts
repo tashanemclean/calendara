@@ -6,7 +6,7 @@ export const getResponses = async (payload: ApiRequestPayload): Promise<ApiRespo
     'Content-Type': 'application/json',
   };
 
-  const endpoint = `http://calendara-go-app-9000-tcp:9000/v1/process`;
+  const endpoint = `/v1/process`;
   const data = await api.post<ApiResponseRaw>(endpoint, payload, {
     headers,
   });
