@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const api = axios.create();
+const api = axios.create({ withCredentials: true });
 
 api.defaults.headers.common['Content-Type'] = 'application/json';
 api.defaults.headers.common.Accept = 'application/json';
