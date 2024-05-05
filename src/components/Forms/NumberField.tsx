@@ -18,7 +18,7 @@ export const DaysNumberField = ({ label, description, errorMessage, ...props }: 
         <Label>{label}</Label>
         <Group>
           <Button
-            style={{ color: colors.Mustard[500], fontSize: '24px' }}
+            style={{ color: colors.Black[500], fontSize: '24px' }}
             slot="decrement"
           >
             <IconContainer>-</IconContainer>
@@ -28,7 +28,7 @@ export const DaysNumberField = ({ label, description, errorMessage, ...props }: 
             style={{ backgroundColor: colors.Mustard[500], border: 'none', color: colors.Space[500] }}
           />
           <Button
-            style={{ color: colors.Mustard[500], fontSize: '24px' }}
+            style={{ color: colors.Black[500], fontSize: '24px' }}
             slot="increment"
           >
             <IconContainer>+</IconContainer>
