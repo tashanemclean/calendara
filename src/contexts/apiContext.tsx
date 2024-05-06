@@ -34,6 +34,7 @@ export function ApiResponseProvider({ children }: Readonly<{ children: ReactNode
         }
       } catch (err: unknown) {
         const axiosErr = err as AxiosError;
+        console.log(axiosErr, '** err');
         dispatch({ type: ApiActionTypes.GET_RESPONSE_FAIL, payload: axiosErr.message });
         errorToast('error with request');
       }
