@@ -13,9 +13,11 @@ interface AdapterPayload {
 
 export interface ApiResponseRaw {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Activities: any[];
-  Duration: string;
-  Location: string;
+  ClassificationResult: {
+    activities: any[];
+    duration: string;
+    location: string;
+  };
 }
 
 export interface ApiResponse {
@@ -64,9 +66,9 @@ export const fromVMToPayload = ({
 
 export const fromResponsesToVM = (payload: ApiResponseRaw) => {
   return {
-    activities: payload.Activities,
-    duration: payload.Duration,
-    location: payload.Location,
+    activities: payload.ClassificationResult.activities,
+    duration: payload.ClassificationResult.duration,
+    location: payload.ClassificationResult.location,
   };
 };
 
