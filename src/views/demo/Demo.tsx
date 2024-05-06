@@ -15,6 +15,7 @@ import { Fade } from '../../components/Transitions/Fade';
 import { colors } from '../../constants/colors';
 import { screen } from '../../constants/screen';
 import useDemo from '../../hooks/useDemo';
+import { Fragment } from 'react';
 
 export const Demo = () => {
   const {
@@ -30,14 +31,19 @@ export const Demo = () => {
     handleStateChange,
     handleDayChange,
   } = useDemo();
-
   const renderDraggable = () =>
-    draggableData?.map((data, key) => (
-      <Draggable
-        key={`${data + key}`}
-        text={data}
-      />
-    ));
+    draggableData?.map((data, key) => {
+      // Exclude undefined keys from view
+      if (data === undefined) {
+        return <Fragment key={`${key++}`}></Fragment>;
+      }
+      return (
+        <Draggable
+          key={`${key++}`}
+          text={data}
+        />
+      );
+    });
 
   return (
     <Container>
