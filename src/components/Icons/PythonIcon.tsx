@@ -20,11 +20,11 @@ export const PythonIcon = () => {
       >
         <stop
           offset="0"
-          stop-color="#5a9fd4"
+          stopColor="#5a9fd4"
         ></stop>
         <stop
           offset="1"
-          stop-color="#306998"
+          stopColor="#306998"
         ></stop>
       </linearGradient>
       <linearGradient
@@ -38,11 +38,11 @@ export const PythonIcon = () => {
       >
         <stop
           offset="0"
-          stop-color="#ffd43b"
+          stopColor="#ffd43b"
         ></stop>
         <stop
           offset="1"
-          stop-color="#ffe873"
+          stopColor="#ffe873"
         ></stop>
       </linearGradient>
       <g>
