@@ -258,6 +258,9 @@
 }
 
 @media print {
+  @page {
+    size: landscape;
+  }
   #no-print {
     display: none;
   }
@@ -266,6 +269,9 @@
     height: 100%;
   }
 
+  .calendar .body .cell {
+    height: 7.8em;
+  }
   .calendar .body .cell .number {
     opacity: 0.3;
   }
