@@ -79,6 +79,7 @@ export const Demo = () => {
         <Panel
           panelHeight="100%"
           panelWidth="25%"
+          panelPadding="24px 24px 2px 24px"
         >
           {loading && (
             <Fade enter={true}>
