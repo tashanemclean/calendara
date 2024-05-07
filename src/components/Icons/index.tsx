@@ -1,6 +1,13 @@
 export { BackArrowIcon } from './BackArrowIcon';
 export { EditIcon } from './EditIcon';
 export { ExpandMoreIcon } from './ExpandMoreIcon';
+export { LinkedinIcon } from './LinkedinIcon';
+export { GithubIcon } from './GithubIcon';
+export { GoLangIcon } from './GoLangIcon';
+export { OpenAIICon } from './OpenaiIcon';
 export { NextArrowIcon } from './NextArrowIcon';
+export { NodeJsIcon } from './NodeJsIcon';
 export { PrevArrowIcon } from './PrevArrowIcon';
+export { PythonIcon } from './PythonIcon';
+export { ReactIcon } from './ReactIcon';
 export { XIcon } from './XIcon';

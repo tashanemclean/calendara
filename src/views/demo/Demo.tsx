@@ -16,6 +16,16 @@ import { colors } from '../../constants/colors';
 import { screen } from '../../constants/screen';
 import useDemo from '../../hooks/useDemo';
 import { Fragment } from 'react';
+import {
+  GithubIcon,
+  GoLangIcon,
+  LinkedinIcon,
+  NodeJsIcon,
+  OpenAIICon,
+  PythonIcon,
+  ReactIcon,
+} from '../../components/Icons';
+import { TextSM } from '../../typography';
 
 export const Demo = () => {
   const {
@@ -87,33 +97,6 @@ export const Demo = () => {
                   onChange={handleDayChange}
                   defaultValue={vm.storedDays ?? 1}
                 />
-                {/* TODO: Refactor fields to use react hook form */}
-                {/* <FormManager
-              onSubmit={handleFind}
-              render={({ control, onSubmit }) => (
-                <>
-                  <CheckboxField
-                    items={activity}
-                    control={control}
-                    id="activity"
-                    label="Activity"
-                  />
-                  <CheckboxField
-                    items={categories}
-                    control={control}
-                    id="categories"
-                    label="Categories"
-                  />
-                  <Button
-                    onClick={onSubmit}
-                    type="submit"
-                    disabled={false}
-                  >
-                    {'Continue'}
-                  </Button>
-                </>
-              )}
-            /> */}
                 <Button
                   onClick={onSubmit}
                   type="submit"
@@ -124,6 +107,11 @@ export const Demo = () => {
                 </Button>
               </EditOptions>
               {!editOptionsActive && <DraggableContainer>{renderDraggable()}</DraggableContainer>}
+              {!editOptionsActive && !draggableData && (
+                <NoDataContainer>
+                  <TextSM.Medium style={{ opacity: '40%' }}> No Data, open menu and search activities</TextSM.Medium>
+                </NoDataContainer>
+              )}
             </>
           )}
         </Panel>
@@ -135,6 +123,66 @@ export const Demo = () => {
           <Calendar />
         </Panel>
       </Section>
+
+      <FooterContainer>
+        <AuthoredByContainer>
+          <div>
+            <span>Authored by:</span>
+          </div>
+          <LinksContainer>
+            <Link
+              href="https://github.com/tashanemclean"
+              target="_blank"
+              className="me-4 text-reset"
+            >
+              <GithubIcon />
+            </Link>
+            <Link
+              href="https://www.linkedin.com/in/tashane-mclean-4a0779177/"
+              target="_blank"
+              className="me-4 text-reset"
+            >
+              <LinkedinIcon />
+            </Link>
+          </LinksContainer>
+        </AuthoredByContainer>
+
+        <PoweredByContainer>
+          <div>
+            <span>Powered by:</span>
+          </div>
+          <Link
+            href="https://openai.com/"
+            target="_blank"
+          >
+            <OpenAIICon />
+          </Link>
+          <Link
+            href="https://react.dev/"
+            target="_blank"
+          >
+            <ReactIcon />
+          </Link>
+          <Link
+            href="https://nodejs.org/en"
+            target="_blank"
+          >
+            <NodeJsIcon />
+          </Link>
+          <Link
+            href="https://go.dev/"
+            target="_blank"
+          >
+            <GoLangIcon />
+          </Link>
+          <Link
+            href="https://www.python.org/"
+            target="_blank"
+          >
+            <PythonIcon />
+          </Link>
+        </PoweredByContainer>
+      </FooterContainer>
     </Container>
   );
 };
@@ -167,3 +215,32 @@ const Section = styled.div`
 `;
 
 const DraggableContainer = styled.div``;
+
+const AuthoredByContainer = styled.div`
+  display: flex;
+  align-items: center;
+  line-height: 0.7;
+  padding-top: 16px;
+  justify-content: center;
+`;
+const LinksContainer = styled.div``;
+
+const PoweredByContainer = styled.div`
+  display: flex;
+  align-items: center;
+  line-height: 0.7;
+  justify-content: center;
+`;
+
+const FooterContainer = styled.div`
+  padding: 0 33px;
+`;
+
+const Link = styled.a`
+  padding: 5px;
+`;
+
+const NoDataContainer = styled.div`
+  position: relative;
+  top: 40%;
+`;
