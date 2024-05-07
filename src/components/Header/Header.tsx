@@ -10,7 +10,7 @@ interface HeaderProps {
 
 export const Header = ({ title, headerEnd }: HeaderProps) => {
   return (
-    <Container>
+    <Container id="no-print">
       <TitleContainer>
         <Title>{title}</Title>
       </TitleContainer>

@@ -8,11 +8,13 @@ interface PanelProps {
   panelWidth?: string;
   panelPadding?: string;
   children: ReactNode | ReactNode[];
+  id?: string;
 }
 
-export const Panel = ({ children, panelHeight, panelWidth, panelPadding }: Readonly<PanelProps>) => {
+export const Panel = ({ children, panelHeight, panelWidth, panelPadding, id }: Readonly<PanelProps>) => {
   return (
     <Container
+      id={id}
       $height={panelHeight}
       $width={panelWidth}
       $padding={panelPadding}

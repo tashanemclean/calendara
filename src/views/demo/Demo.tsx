@@ -55,7 +55,9 @@ export const Demo = () => {
       );
     });
 
-  const onExport = () => {};
+  const onExport = () => {
+    window.print();
+  };
 
   const renderExportButton = () => {
     return (
@@ -75,8 +77,9 @@ export const Demo = () => {
         title="Calendara"
         headerEnd={renderExportButton()}
       />
-      <Section>
+      <Section className="section">
         <Panel
+          id="no-print"
           panelHeight="100%"
           panelWidth="25%"
           panelPadding="24px 24px 2px 24px"
@@ -142,7 +145,7 @@ export const Demo = () => {
         </Panel>
       </Section>
 
-      <FooterContainer>
+      <FooterContainer id="no-print">
         <AuthoredByContainer>
           <div>
             <span>Authored by:</span>

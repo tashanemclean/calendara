@@ -256,3 +256,40 @@
 .react-aria-NumberField .react-aria-Label {
   padding: 12px 20px;
 }
+
+@media print {
+  #no-print {
+    display: none;
+  }
+
+  .calendar {
+    height: 100%;
+  }
+
+  .calendar .body .cell .number {
+    opacity: 0.3;
+  }
+
+  .calendar .header .col-start {
+    display: none;
+  }
+
+  .calendar .header .col-end {
+    display: none;
+  }
+
+  .calendar .body .selected {
+    border: none;
+    border-right: 1px solid var(--border-color);
+    border-image: none;
+    border-image-slice: none;
+  }
+
+  .calendar .body .selected .bg {
+    opacity: 0;
+  }
+
+  .section {
+    height: 100% !important;
+  }
+}
