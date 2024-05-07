@@ -55,9 +55,26 @@ export const Demo = () => {
       );
     });
 
+  const onExport = () => {};
+
+  const renderExportButton = () => {
+    return (
+      <Button
+        onClick={onExport}
+        type="submit"
+        disabled={loading}
+      >
+        Export
+      </Button>
+    );
+  };
+
   return (
     <Container>
-      <Header title="Calendara" />
+      <Header
+        title="Calendara"
+        headerEnd={renderExportButton()}
+      />
       <Section>
         <Panel
           panelHeight="100%"

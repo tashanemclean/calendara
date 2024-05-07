@@ -20,13 +20,12 @@ export const Header = ({ title, headerEnd }: HeaderProps) => {
 };
 
 const Container = styled.div`
-  height: 120px;
   color: black;
   background-color: white;
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 33px;
+  padding: 20px 33px 0;
   box-sizing: border-box;
 
   @media (max-width: ${screen.mobile.max}px) {
