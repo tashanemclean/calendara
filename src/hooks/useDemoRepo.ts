@@ -7,10 +7,14 @@ const useDemoRepo = () => {
   const {
     state: { activitiesIds, categoriesIds, storedCity, storedDays, storedState },
   } = useDropdownContext();
+
+  // Ensure state has been selected before preparing payload data
+  // TODO: consume data from state instead of persisted localStorage values
   const prepareData = () => {
     if (!storedState) return;
     return fromVMToPayload({ activitiesIds, categoriesIds, storedCity, storedDays, storedState });
   };
+
   return {
     state,
     prepareData,

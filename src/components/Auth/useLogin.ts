@@ -11,6 +11,7 @@ const useLogin = () => {
   const [loginError, setLoginError] = useState('');
   const [loginAttempts, setLoginAttempts] = useState(0);
 
+  // TODO: prevent repeated login attempts
   const tooManyAttempts = useMemo(() => {
     return loginAttempts >= 5;
   }, [loginAttempts]);
@@ -18,6 +19,7 @@ const useLogin = () => {
   const handleLogin = async ({ email, password }: FieldValues) => {
     await login(String(email), String(password));
   };
+
   const actualError = useMemo(() => {
     return (
       (tooManyAttempts && "You've made too many recent attempts. Please try again later, or reset your password.") ||

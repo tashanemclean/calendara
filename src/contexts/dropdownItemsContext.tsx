@@ -33,6 +33,7 @@ export function StoredDropdownProvider({ children }: Readonly<{ children: ReactN
   const [state, dispatch] = useReducer(dropdownReducer, initialState);
 
   // Region storage init
+  // Get the values that are persisted in local storage
   const [persistedItems, setPersistedItems] = useLocalStorage<{
     activitiesIds?: string[] | null;
     categoriesIds?: string[] | null;
@@ -41,6 +42,7 @@ export function StoredDropdownProvider({ children }: Readonly<{ children: ReactN
     storedDays?: number | null;
   }>('act-cat');
 
+  // Updates context state and localStorage
   const modify = useCallback(
     (item: string[] | string | number, key: string, type: typeof UPDATE_STORED_ITEM_TYPE) => {
       dispatch({ type: DropdownActionTypes[type], payload: { [key]: item } });

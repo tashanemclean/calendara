@@ -35,12 +35,14 @@ export const Demo = () => {
     stateId,
     storageVM: [vm],
     loading,
+    onExport,
     onSubmit,
     onTextChange,
     handleCityChange,
     handleStateChange,
     handleDayChange,
   } = useDemo();
+
   const renderDraggable = () =>
     draggableData?.map((data, key) => {
       // Exclude undefined keys from view
@@ -54,10 +56,6 @@ export const Demo = () => {
         />
       );
     });
-
-  const onExport = () => {
-    window.print();
-  };
 
   const renderExportButton = () => {
     return (

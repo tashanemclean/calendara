@@ -10,14 +10,18 @@ export const EditOptions = ({ children }: { children: ReactNode }) => {
     state: { editOptionsActive },
   } = useUserInterface();
 
+  // Menu open Abstraction to isolate opening menu
   const onShowOptions = useCallback(() => {
     showEditOptions();
   }, [showEditOptions]);
 
+  // Menu open Abstraction to isolate opening menu
   const onCloseOptions = useCallback(() => {
     hideEditOptions();
   }, [hideEditOptions]);
 
+  // Show / hide for opening and closing menu
+  // Events are logged by default UI context, we call open to allow toggling of UI
   const onToggle = (e: MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
     e.stopPropagation();

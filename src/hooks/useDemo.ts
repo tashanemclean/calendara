@@ -50,6 +50,11 @@ const useDemo = () => {
     onCloseOptions();
   };
 
+  const onExport = () => {
+    window.print();
+  };
+
+  // Need to check state for persisted value, then update form accordingly
   useEffect(() => {
     if (state.dropdownItemsVM.storedState) {
       setStateId(state.dropdownItemsVM.storedState.id);
@@ -64,6 +69,7 @@ const useDemo = () => {
     stateId,
     storageVM,
     loading,
+    onExport,
     onSubmit,
     onTextChange,
     setCityId,

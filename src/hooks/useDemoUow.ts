@@ -14,6 +14,8 @@ const useDemoUow = () => {
     prepareData,
   } = useDemoRepo();
   const { errorToast } = useCustomToast();
+
+  // Persisted form values abstraction, unifying the values that are persisted
   const storageVM = useMemo(
     () => [
       {
@@ -25,10 +27,11 @@ const useDemoUow = () => {
     [dropdownItemsVM.storedCity, dropdownItemsVM.storedState, dropdownItemsVM.storedDays],
   );
 
+  // Optimistically ensure payload is correct
   const onGetResponses = async () => {
     const payload = prepareData();
     if (!payload) {
-      errorToast('State is required');
+      errorToast('Select a state');
       return;
     }
     await getResponse(payload);
