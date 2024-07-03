@@ -5,11 +5,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'recipon-mustard': '#E7CC65',
-        'recipon-beach': '#1B383A',
-        'recpion-gray': '#656565',
-        'recipon-light-gray': '#F0F0F0',
-        'recipon-very-light-gray': '#F8F8F8',
+        'calendara-mustard': '#E7CC65',
+        'calendara-beach': '#1B383A',
+        'calendara-gray': '#656565',
+        'calendara-light-gray': '#F0F0F0',
+        'calendara-very-light-gray': '#F8F8F8',
       },
       fontFamily: {
         abril: ['AbrilFatface_400Regular'],

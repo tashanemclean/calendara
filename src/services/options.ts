@@ -6,7 +6,7 @@ export const getResponses = async (payload: ApiRequestPayload): Promise<ApiRespo
     'Content-Type': 'application/json',
   };
 
-  const endpoint = `/v1/process`;
+  const endpoint = `/v1/processText`;
   const data = await api.post<ApiResponseRaw>(endpoint, payload, {
     headers,
   });
